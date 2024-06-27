@@ -1,12 +1,13 @@
 import 'package:door_care_worker/view/feature/auth/page/sign_up_page.dart';
-import 'package:door_care_worker/view/feature/auth/page/verification_code.dart';
+import 'package:door_care_worker/view/feature/home/page/home.dart';
+import 'package:door_care_worker/view/widget/padding_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../theme/color/app_color.dart';
 import '../../../util/svg_asset.dart';
 import '../../onboarding/widget/cutom_elevated_button.dart';
 import '../widget/customTextFormField.dart';
+import '../widget/customeGestureText.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -21,24 +22,29 @@ class SignInPage extends StatelessWidget {
       body: SafeArea(
         child: Form(
           key: formKey,
-          child: Column(
-            children: [
-              Spacer(flex: 5),
-              Center(child: SvgPicture.asset(AppSvgPath.mainLogo)),
-              Spacer(flex: 1),
-              Text(
-                'Sign in',
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 35,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-              Spacer(flex: 2),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: CustomTextFormField(
+          child: PaddingWidget(
+            child: Column(
+              children: [
+                const Spacer(
+                  flex: 5,
+                ),
+                Center(
+                  child: SvgPicture.asset(
+                    AppSvgPath.mainLogo,
+                  ),
+                ),
+                const Spacer(flex: 1),
+                Text(
+                  'Sign in',
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 35,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(flex: 2),
+                CustomTextFormField(
                   controller: emailController,
                   labelText: 'E-mail',
                   hintText: 'Enter your email',
@@ -53,15 +59,12 @@ class SignInPage extends StatelessWidget {
                   },
                   prefixIcon: AppSvgPath.mailLogo,
                 ),
-              ),
-              Spacer(flex: 1),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: CustomTextFormField(
+                const Spacer(flex: 1),
+                CustomTextFormField(
                   controller: passwordController,
                   labelText: 'Password',
                   hintText: 'Enter your password',
-                  obscureText: true, // Hide the password with ****
+                  obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
@@ -73,17 +76,14 @@ class SignInPage extends StatelessWidget {
                   prefixIcon: AppSvgPath.passwordLogo,
                   showPasswordToggle: true,
                 ),
-              ),
-              const Spacer(flex: 5),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: CustomElevatedButton(
+                const Spacer(flex: 5),
+                CustomElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (ctx) => const OtpVerificationPage(),
+                          builder: (ctx) => const HomePage(),
                         ),
                       );
                     }
@@ -95,36 +95,22 @@ class SignInPage extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => SignUpPage()));
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Create a New Account? ',
-                      style:
-                          Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                color: AppColor.secondary,
-                                fontSize: 18,
-                              ),
-                    ),
-                    Text(
-                      'Sign up',
-                      style:
-                          Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                color: AppColor.primary,
-                                fontSize: 18,
-                              ),
-                    ),
-                  ],
+                const Spacer(
+                  flex: 1,
                 ),
-              ),
-              const Spacer(flex: 20),
-            ],
+                CustomGestureText(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (ctx) => const SignUpPage()),
+                    );
+                  },
+                  mainText: "Don't have an account? ",
+                  actionText: 'Join our team for free',
+                ),
+                const Spacer(flex: 20),
+              ],
+            ),
           ),
         ),
       ),

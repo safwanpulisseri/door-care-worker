@@ -1,8 +1,6 @@
 import 'package:door_care_worker/bloc/bloc/onboarding_bloc.dart';
 import 'package:flutter/material.dart';
-
 import '../../../theme/color/app_color.dart';
-import 'onboarding_skip_widgt.dart';
 
 class OnboardingContentWidget extends StatelessWidget {
   final String image;

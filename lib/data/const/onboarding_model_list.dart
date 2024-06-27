@@ -7,15 +7,18 @@ final class OnboardingModelList {
   static const List<OnboardingModel> list = [
     OnboardingModel(
         image: AppPngPath.onboardOne,
-        title: "Reliable Home\nServices at\nYour Fingertips",
-        subtitle: "Plumbing, Electrical, and AC Repairs\nJust a Tap Away"),
+        title: "Maximize Your\nEarnings",
+        subtitle:
+            "Discover high-paying jobs in your area\ntailored to your skills. Join Door Care and\ntart maximizing your earnings today!"),
     OnboardingModel(
         image: AppPngPath.onboardTwo,
-        title: "Plumber & expert\nnearby you",
-        subtitle: "Expert Plumbers Ready to Fix Leaks,\nClogs, and More."),
+        title: "Flexible\nScheduling",
+        subtitle:
+            "Work when you want, where you want. With\nDoor Care, you have the freedom to choose\njobs that fit your schedule and location\npreferences."),
     OnboardingModel(
         image: AppPngPath.onboardThree,
-        title: "Keep Your Home\nBright and Safe",
-        subtitle: "Professional Electrical Services for\nAll Your Needs.")
+        title: "Growth and\nSupport",
+        subtitle:
+            "Join a community that values your expertise\nand supports your professional growth. At\nDoor Care, we’re committed to helping you\nachieve success and satisfaction in your\ncareer.")
   ];
 }

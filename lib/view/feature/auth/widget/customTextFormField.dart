@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../theme/color/app_color.dart';
-import '../../../util/svg_asset.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -12,9 +11,10 @@ class CustomTextFormField extends StatefulWidget {
   final bool obscureText;
   final String? prefixIcon;
   final bool showPasswordToggle;
+  final TextInputType? keyboardType;
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     required this.hintText,
@@ -22,7 +22,8 @@ class CustomTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.prefixIcon,
     this.showPasswordToggle = false,
-  }) : super(key: key);
+    this.keyboardType,
+  });
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
@@ -63,7 +64,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   )
                 : null, // Use prefixIcon if provided
             hintText: widget.hintText,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Colors.grey,
               fontSize: 16.0,
             ),
@@ -73,7 +74,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: AppColor.primary,
                 width: 1.0,
               ),
@@ -92,7 +93,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   )
                 : null,
           ),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16.0,
             color: Colors.black,
           ),

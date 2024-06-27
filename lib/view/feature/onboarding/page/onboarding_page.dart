@@ -1,13 +1,8 @@
 import 'dart:developer';
-
 import 'package:door_care_worker/bloc/bloc/onboarding_bloc.dart';
 import 'package:door_care_worker/view/feature/onboarding/widget/onboarding_content_widget.dart';
 import 'package:flutter/material.dart';
-
-import 'package:door_care_worker/view/theme/color/app_color.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../data/const/onboarding_model_list.dart';
-import '../../auth/page/sign_in_page.dart';
 import '../widget/onboarding_round_widget.dart';
 import '../widget/onboarding_skip_widgt.dart';
 
