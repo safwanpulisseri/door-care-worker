@@ -1,9 +1,6 @@
-import 'package:door_care_worker/view/feature/auth/page/sign_up_page.dart';
-import 'package:door_care_worker/view/feature/navigation_menu/page/home_navigation_menu.dart';
-import 'package:door_care_worker/view/theme/app_theme.dart';
+import 'package:door_care_worker/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import 'view/feature/onboarding/page/splash_page.dart';
+import 'feature/onboarding/view/page/splash_page.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});
