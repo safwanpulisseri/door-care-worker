@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../theme/color/app_color.dart';
 import '../../../util/png_asset.dart';
 import '../../../widget/opacity_container.dart';
-import '../../auth/widget/customTextFormField.dart';
+import '../../auth/widget/custom_textformfield.dart';
 import '../widget/appbar_widget.dart';
 
 class UserDetailsPage extends StatelessWidget {
@@ -64,6 +64,26 @@ class UserDetailsPage extends StatelessWidget {
               controller: _mobileNumberController,
               labelText: 'Mobile Number',
               hintText: 'Update your number',
+            ),
+            CustomTextFormField(
+              controller: _mobileNumberController,
+              labelText: 'Email',
+              hintText: 'Update your email',
+            ),
+            CustomTextFormField(
+              controller: _mobileNumberController,
+              labelText: 'Experience',
+              hintText: 'Update your experience',
+            ),
+            CustomTextFormField(
+              controller: _mobileNumberController,
+              labelText: 'Service',
+              hintText: 'Update your service',
+            ),
+            CustomTextFormField(
+              controller: _mobileNumberController,
+              labelText: 'District',
+              hintText: 'Update your district',
             ),
           ],
         ),

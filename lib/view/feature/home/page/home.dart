@@ -103,23 +103,23 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  children: [
-                    const OpacityContainer(),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Join Our Team',
-                      style:
-                          Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                color: AppColor.secondary,
-                              ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const JoinOurTeamCard(),
+                // Row(
+                //   children: [
+                //     const OpacityContainer(),
+                //     const SizedBox(
+                //       width: 10,
+                //     ),
+                //     Text(
+                //       'Join Our Team',
+                //       style:
+                //           Theme.of(context).textTheme.headlineLarge?.copyWith(
+                //                 color: AppColor.secondary,
+                //               ),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 10),
+                // const JoinOurTeamCard(),
               ],
             ),
           ],

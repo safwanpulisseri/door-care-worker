@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:door_care_worker/bloc/bloc/onboarding_bloc.dart';
+import 'package:door_care_worker/bloc/onboarding_bloc/onboarding_bloc.dart';
 import 'package:door_care_worker/view/feature/onboarding/widget/onboarding_content_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/const/onboarding_model_list.dart';

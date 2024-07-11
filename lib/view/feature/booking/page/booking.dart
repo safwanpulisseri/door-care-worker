@@ -2,7 +2,6 @@ import 'package:door_care_worker/view/feature/booking/tabs/committed_tab.dart';
 import 'package:door_care_worker/view/feature/booking/tabs/completed_tab.dart';
 import 'package:door_care_worker/view/feature/booking/tabs/pending_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../theme/color/app_color.dart';
 import '../../../widget/opacity_container.dart';
 
@@ -39,21 +38,25 @@ class _BookingPageState extends State<BookingPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: double.infinity,
         automaticallyImplyLeading: false,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 20),
-          child: Row(
-            children: [
-              OpacityContainer(),
-            ],
-          ),
-        ),
-        title: Text(
-          'Bookings',
-          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                color: AppColor.secondary,
-                fontSize: 30,
-              ),
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            const OpacityContainer(),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Work Status',
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    color: AppColor.secondary,
+                    fontSize: 28,
+                  ),
+            ),
+          ],
         ),
         backgroundColor: AppColor.background,
         bottom: PreferredSize(
@@ -67,15 +70,6 @@ class _BookingPageState extends State<BookingPage>
                 _buildSegment('Pending', 0),
                 _buildSegment('Committed', 1),
                 _buildSegment('Completed', 2),
-                // Tab(
-                //   text: 'Pending',
-                // ),
-                // Tab(
-                //   text: 'Committed',
-                // ),
-                // Tab(
-                //   text: 'Completed',
-                // )
               ],
             ),
           ),

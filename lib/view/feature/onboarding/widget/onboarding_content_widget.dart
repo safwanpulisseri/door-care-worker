@@ -1,4 +1,4 @@
-import 'package:door_care_worker/bloc/bloc/onboarding_bloc.dart';
+import 'package:door_care_worker/bloc/onboarding_bloc/onboarding_bloc.dart';
 import 'package:flutter/material.dart';
 import '../../../theme/color/app_color.dart';
 

@@ -6,8 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import '../../../theme/color/app_color.dart';
 import '../../../util/svg_asset.dart';
 import '../../onboarding/widget/cutom_elevated_button.dart';
-import '../widget/customTextFormField.dart';
-import '../widget/customeGestureText.dart';
+import '../util/auth_util.dart';
+import '../widget/custom_textformfield.dart';
+import '../widget/custome_gesture_text.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -48,15 +49,7 @@ class SignInPage extends StatelessWidget {
                   controller: emailController,
                   labelText: 'E-mail',
                   hintText: 'Enter your email',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
-                        .hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
+                  validator: AuthUtil.validateEmail,
                   prefixIcon: AppSvgPath.mailLogo,
                 ),
                 const Spacer(flex: 1),
@@ -65,14 +58,7 @@ class SignInPage extends StatelessWidget {
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    } else if (value.length < 6) {
-                      return 'Password must be at least 6 characters long';
-                    }
-                    return null;
-                  },
+                  validator: AuthUtil.validatePassword,
                   prefixIcon: AppSvgPath.passwordLogo,
                   showPasswordToggle: true,
                 ),

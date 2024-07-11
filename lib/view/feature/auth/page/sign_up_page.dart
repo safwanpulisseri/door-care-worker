@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:door_care_worker/view/feature/auth/page/verify_worker.dart';
 import 'package:door_care_worker/view/feature/auth/widget/image_container.dart';
 import 'package:door_care_worker/view/util/list_of_elements.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/material.dart';
 import '../../../theme/color/app_color.dart';
 import '../../drawer/widget/appbar_widget.dart';
 import '../../onboarding/widget/cutom_elevated_button.dart';
-import '../widget/customTextFormField.dart';
-import '../widget/customeGestureText.dart';
+import '../util/auth_util.dart';
+import '../widget/custom_textformfield.dart';
+import '../widget/custome_gesture_text.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -16,16 +18,17 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
   final TextEditingController districtController = TextEditingController();
   final TextEditingController serviceController = TextEditingController();
   final TextEditingController experienceController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  File? profileImage;
+  File? idCardImage;
 
   @override
   Widget build(BuildContext context) {
@@ -48,44 +51,24 @@ class _SignUpPageState extends State<SignUpPage> {
                   textAlign: TextAlign.center,
                 ),
                 CustomTextFormField(
-                  controller: firstNameController,
+                  controller: nameController,
                   labelText: 'Name',
-                  hintText: 'Enter your full name',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your first name';
-                    }
-                    return null;
-                  },
+                  hintText: 'Enter your name',
+                  validator: AuthUtil.validateName,
                 ),
                 CustomTextFormField(
                   controller: mobileController,
                   labelText: 'Mobile Number',
                   hintText: 'Enter your mobile number',
                   keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your mobile number';
-                    } else if (!RegExp(r'^\d{10}$').hasMatch(value)) {
-                      return 'Please enter a valid 10-digit mobile number';
-                    }
-                    return null;
-                  },
+                  validator: AuthUtil.validateMobileNumber,
                 ),
                 CustomTextFormField(
                   controller: emailController,
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
-                        .hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
+                  validator: AuthUtil.validateEmail,
                 ),
                 GestureDetector(
                   onTap: () async {
@@ -126,12 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: districtController,
                       labelText: 'District',
                       hintText: 'Select your district',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select your district';
-                        }
-                        return null;
-                      },
+                      validator: AuthUtil.validateDistrict,
                     ),
                   ),
                 ),
@@ -174,12 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: serviceController,
                       labelText: 'Service',
                       hintText: 'Select your service',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select your service';
-                        }
-                        return null;
-                      },
+                      validator: AuthUtil.validateService,
                     ),
                   ),
                 ),
@@ -188,54 +161,50 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Experience',
                   hintText: 'Enter your experience',
                   keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your experience';
-                    } else if (!RegExp(r'^\d+$').hasMatch(value)) {
-                      return 'Please enter a valid experience';
-                    }
-                    return null;
-                  },
+                  validator: AuthUtil.validateExperience,
                 ),
                 CustomTextFormField(
                   controller: passwordController,
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    } else if (value.length < 6) {
-                      return 'Password must be at least 6 characters long';
-                    }
-                    return null;
-                  },
-                  showPasswordToggle: true,
-                ),
-                CustomTextFormField(
-                  controller: confirmPasswordController,
-                  labelText: 'Confirm Password',
-                  hintText: 'Re-enter your password',
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
-                    } else if (value != passwordController.text) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
+                  validator: AuthUtil.validatePassword,
                   showPasswordToggle: true,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const ImageContainerWidget(),
+                ImageContainerWidget(
+                  onProfileImageSelected: (file) {
+                    setState(() {
+                      profileImage = file;
+                    });
+                  },
+                  onIdCardImageSelected: (file) {
+                    setState(
+                      () {
+                        idCardImage = file;
+                      },
+                    );
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: CustomElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
+                        if (AuthUtil.validateImage(profileImage) != null ||
+                            AuthUtil.validateImage(idCardImage) != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                AuthUtil.validateImage(profileImage) ??
+                                    AuthUtil.validateImage(idCardImage)!,
+                              ),
+                            ),
+                          );
+                          return;
+                        }
                         Navigator.push(
                           context,
                           MaterialPageRoute(

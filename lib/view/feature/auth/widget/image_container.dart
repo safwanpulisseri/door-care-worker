@@ -1,19 +1,88 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../theme/color/app_color.dart';
 
 class ImageContainerWidget extends StatefulWidget {
-  const ImageContainerWidget({super.key});
+  final Function(File) onProfileImageSelected;
+  final Function(File) onIdCardImageSelected;
+
+  const ImageContainerWidget({
+    Key? key,
+    required this.onProfileImageSelected,
+    required this.onIdCardImageSelected,
+  }) : super(key: key);
 
   @override
-  State<ImageContainerWidget> createState() => _ImageContainerWidgetState();
+  _ImageContainerWidgetState createState() => _ImageContainerWidgetState();
 }
 
 class _ImageContainerWidgetState extends State<ImageContainerWidget> {
+  File? profileImage;
+  File? idCardImage;
+  final ImagePicker _picker = ImagePicker();
+
+  void _pickImage(String type, ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      setState(() {
+        if (type == 'profile') {
+          profileImage = file;
+          widget.onProfileImageSelected(file);
+        } else {
+          idCardImage = file;
+          widget.onIdCardImageSelected(file);
+        }
+      });
+    }
+  }
+
+  void _showImagePickerDialog(String type) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Select Image',
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: AppColor.secondary,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    _pickImage(type, ImageSource.gallery);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.image,
+                    color: AppColor.secondary,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    _pickImage(type, ImageSource.camera);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.camera_alt_rounded,
+                    color: AppColor.secondary,
+                  ),
+                )
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +110,7 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                       child: IconButton(
                         onPressed: null,
                         icon: profileImage != null
-                            ? Image.file(File(profileImage!.path))
+                            ? Image.file(profileImage!)
                             : const FaIcon(FontAwesomeIcons.plus),
                       ),
                     ),
@@ -60,7 +129,7 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                       child: IconButton(
                         onPressed: null,
                         icon: idCardImage != null
-                            ? Image.file(File(idCardImage!.path))
+                            ? Image.file(idCardImage!)
                             : const FaIcon(FontAwesomeIcons.plus),
                       ),
                     ),
@@ -68,9 +137,7 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 7,
-            ),
+            const SizedBox(height: 7),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -87,73 +154,12 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                     fontSize: 16.0,
                     color: AppColor.toneThree,
                   ),
-                )
+                ),
               ],
             )
           ],
         ),
       ),
-    );
-  }
-
-  final ImagePicker _picker = ImagePicker();
-
-  XFile? profileImage;
-
-  XFile? idCardImage;
-
-  void _pickImage(String type, ImageSource source) async {
-    final pickedFile = await _picker.pickImage(source: source);
-    setState(() {
-      if (type == 'profile') {
-        profileImage = pickedFile;
-      } else {
-        idCardImage = pickedFile;
-      }
-    });
-  }
-
-  void _showImagePickerDialog(String type) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Select Image',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: AppColor.secondary,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () async {
-                    _pickImage(type, ImageSource.gallery);
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.image,
-                    color: AppColor.secondary,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () async {
-                    _pickImage(type, ImageSource.camera);
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.camera_alt_rounded,
-                    color: AppColor.secondary,
-                  ),
-                )
-              ],
-            )
-          ],
-        );
-      },
     );
   }
 }
