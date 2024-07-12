@@ -1,16 +1,16 @@
-import 'package:door_care_worker/feature/booking/page/booking.dart';
-import 'package:door_care_worker/feature/home/page/home.dart';
+import 'package:door_care_worker/feature/booking/view/page/booking.dart';
+import 'package:door_care_worker/feature/home/view/page/home.dart';
 import 'package:door_care_worker/core/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 
-class HomeNavigationMenu extends StatefulWidget {
-  const HomeNavigationMenu({super.key});
+class NavigationMenu extends StatefulWidget {
+  const NavigationMenu({super.key});
 
   @override
-  State<HomeNavigationMenu> createState() => _HomeNavigationMenuState();
+  State<NavigationMenu> createState() => _HomeNavigationMenuState();
 }
 
-class _HomeNavigationMenuState extends State<HomeNavigationMenu> {
+class _HomeNavigationMenuState extends State<NavigationMenu> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
     const HomePage(),

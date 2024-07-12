@@ -7,37 +7,38 @@ sealed class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class SignInAuthEvent extends AuthEvent {
+final class CheckUserEvent extends AuthEvent {}
+
+final class EmailSignInAuthEvent extends AuthEvent {
   final String email;
   final String password;
 
-  const SignInAuthEvent({
+  const EmailSignInAuthEvent({
     required this.email,
     required this.password,
   });
 }
 
-final class CreateWorkerAuthEvent extends AuthEvent {
+final class AccountCreateAuthEvent extends AuthEvent {
   final String name;
-  final String mobile;
+  final String password;
   final String email;
+  final String mobile;
+  final int experience;
   final String district;
   final String service;
-  final int experience;
-  final String password;
-  final String confirmPassword;
-  final String profileImage;
   final String idCardImage;
-  const CreateWorkerAuthEvent({
+  final String profileImage;
+
+  const AccountCreateAuthEvent({
     required this.name,
-    required this.mobile,
+    required this.password,
     required this.email,
+    required this.mobile,
+    required this.experience,
     required this.district,
     required this.service,
-    required this.experience,
-    required this.password,
-    required this.confirmPassword,
-    required this.profileImage,
     required this.idCardImage,
+    required this.profileImage,
   });
 }

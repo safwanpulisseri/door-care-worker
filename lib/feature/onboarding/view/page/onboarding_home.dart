@@ -42,6 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         onPressed: () {
+                          print('Skip button pressed');
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -71,6 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: currentIndex == pagesLength - 1
                   ? ElevatedButton(
                       onPressed: () {
+                        print('Get Started button pressed');
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
