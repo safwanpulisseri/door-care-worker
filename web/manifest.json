@@ -1,6 +1,6 @@
 {
-    "name": "door_care_worker",
-    "short_name": "door_care_worker",
+    "name": "doorcareworker",
+    "short_name": "doorcareworker",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

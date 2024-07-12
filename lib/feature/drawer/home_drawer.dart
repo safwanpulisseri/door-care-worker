@@ -1,7 +1,7 @@
-import 'package:door_care_worker/feature/drawer/page/user_details.dart';
-import 'package:door_care_worker/feature/drawer/page/wallet.dart';
-import 'package:door_care_worker/core/theme/color/app_color.dart';
-import 'package:door_care_worker/core/util/png_asset.dart';
+import 'package:doorcareworker/feature/drawer/page/user_details.dart';
+import 'package:doorcareworker/feature/drawer/page/wallet.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
+import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {

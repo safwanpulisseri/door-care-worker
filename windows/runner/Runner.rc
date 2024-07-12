@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "door_care_worker" "\0"
+            VALUE "FileDescription", "doorcareworker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "door_care_worker" "\0"
+            VALUE "InternalName", "doorcareworker" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "door_care_worker.exe" "\0"
-            VALUE "ProductName", "door_care_worker" "\0"
+            VALUE "OriginalFilename", "doorcareworker.exe" "\0"
+            VALUE "ProductName", "doorcareworker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

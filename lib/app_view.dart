@@ -1,4 +1,4 @@
-import 'package:door_care_worker/core/theme/app_theme.dart';
+import 'package:doorcareworker/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 import 'feature/onboarding/view/page/splash_page.dart';

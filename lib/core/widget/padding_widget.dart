@@ -1,4 +1,4 @@
-import 'package:door_care_worker/core/util/app_padding.dart';
+import 'package:doorcareworker/core/util/app_padding.dart';
 import 'package:flutter/material.dart';
 
 class PaddingWidget extends StatelessWidget {

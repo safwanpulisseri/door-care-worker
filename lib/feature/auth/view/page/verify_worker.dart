@@ -1,5 +1,5 @@
-import 'package:door_care_worker/feature/auth/view/page/sign_in_page.dart';
-import 'package:door_care_worker/core/util/jason_asset.dart';
+import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
+import 'package:doorcareworker/core/util/jason_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/theme/color/app_color.dart';

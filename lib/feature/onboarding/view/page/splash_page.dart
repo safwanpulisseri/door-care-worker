@@ -1,5 +1,5 @@
-import 'package:door_care_worker/core/theme/color/app_color.dart';
-import 'package:door_care_worker/core/util/svg_asset.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
+import 'package:doorcareworker/core/util/svg_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'onboarding_home.dart';

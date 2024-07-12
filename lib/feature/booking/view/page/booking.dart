@@ -1,6 +1,6 @@
-import 'package:door_care_worker/feature/booking/view/tabs/committed_tab.dart';
-import 'package:door_care_worker/feature/booking/view/tabs/completed_tab.dart';
-import 'package:door_care_worker/feature/booking/view/tabs/pending_tab.dart';
+import 'package:doorcareworker/feature/booking/view/tabs/committed_tab.dart';
+import 'package:doorcareworker/feature/booking/view/tabs/completed_tab.dart';
+import 'package:doorcareworker/feature/booking/view/tabs/pending_tab.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/widget/opacity_container.dart';

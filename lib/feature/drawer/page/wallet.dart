@@ -1,5 +1,5 @@
-import 'package:door_care_worker/feature/drawer/widget/appbar_widget.dart';
-import 'package:door_care_worker/core/util/png_asset.dart';
+import 'package:doorcareworker/feature/drawer/widget/appbar_widget.dart';
+import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
 
 class WalletPage extends StatelessWidget {

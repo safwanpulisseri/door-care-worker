@@ -1,4 +1,4 @@
-import 'package:door_care_worker/core/theme/color/app_color.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 
 class SearchWidget extends StatelessWidget {

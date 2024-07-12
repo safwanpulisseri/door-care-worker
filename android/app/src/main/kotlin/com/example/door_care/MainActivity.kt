@@ -1,4 +1,4 @@
-package com.example.door_care_worker
+package com.example.doorcareworker
 
 import io.flutter.embedding.android.FlutterActivity
 

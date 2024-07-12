@@ -1,7 +1,7 @@
-import 'package:door_care_worker/feature/drawer/home_drawer.dart';
-import 'package:door_care_worker/feature/home/view/widget/search_widget.dart';
-import 'package:door_care_worker/core/theme/color/app_color.dart';
-import 'package:door_care_worker/core/widget/padding_widget.dart';
+import 'package:doorcareworker/feature/drawer/home_drawer.dart';
+import 'package:doorcareworker/feature/home/view/widget/search_widget.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
+import 'package:doorcareworker/core/widget/padding_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/widget/opacity_container.dart';
 import '../widget/join_our_team.dart';

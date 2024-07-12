@@ -1,6 +1,6 @@
-import 'package:door_care_worker/feature/booking/view/page/booking.dart';
-import 'package:door_care_worker/feature/home/view/page/home.dart';
-import 'package:door_care_worker/core/theme/color/app_color.dart';
+import 'package:doorcareworker/feature/booking/view/page/booking.dart';
+import 'package:doorcareworker/feature/home/view/page/home.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 
 class NavigationMenu extends StatefulWidget {
