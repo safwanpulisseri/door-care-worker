@@ -146,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                   const Spacer(
                     flex: 1,
                   ),
-                  const TermsAndConditionsWidget(),
+                  // const TermsAndConditionsWidget(),
                   const Spacer(
                     flex: 20,
                   ),

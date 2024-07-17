@@ -1,165 +1,181 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/color/app_color.dart';
 
 class ImageContainerWidget extends StatefulWidget {
-  final Function(File) onProfileImageSelected;
-  final Function(File) onIdCardImageSelected;
+  final void Function(File) onProfileImageSelected;
+  final void Function(File) onIdCardImageSelected;
 
   const ImageContainerWidget({
-    Key? key,
+    super.key,
     required this.onProfileImageSelected,
     required this.onIdCardImageSelected,
-  }) : super(key: key);
+  });
 
   @override
-  _ImageContainerWidgetState createState() => _ImageContainerWidgetState();
+  createState() => _ImageContainerWidgetState();
 }
 
 class _ImageContainerWidgetState extends State<ImageContainerWidget> {
-  File? profileImage;
-  File? idCardImage;
-  final ImagePicker _picker = ImagePicker();
+  File? _profileImage;
+  File? _idCardImage;
 
-  void _pickImage(String type, ImageSource source) async {
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      final file = File(pickedFile.path);
-      setState(() {
-        if (type == 'profile') {
-          profileImage = file;
-          widget.onProfileImageSelected(file);
-        } else {
-          idCardImage = file;
-          widget.onIdCardImageSelected(file);
-        }
-      });
-    }
-  }
-
-  void _showImagePickerDialog(String type) {
-    showDialog(
+  Future<void> _pickImage(BuildContext context, Function(File) onImageSelected,
+      bool isProfileImage) async {
+    final ImagePicker imagePicker = ImagePicker();
+    showModalBottomSheet(
+      backgroundColor: AppColor.background,
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Select Image',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: AppColor.secondary,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    _pickImage(type, ImageSource.gallery);
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.image,
-                    color: AppColor.secondary,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    _pickImage(type, ImageSource.camera);
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.camera_alt_rounded,
-                    color: AppColor.secondary,
-                  ),
-                )
-              ],
-            )
+      builder: (context) => SafeArea(
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: const FaIcon(FontAwesomeIcons.images),
+              title: const Text('Photo Library'),
+              onTap: () async {
+                final pickedFile =
+                    await imagePicker.pickImage(source: ImageSource.gallery);
+                if (pickedFile != null) {
+                  setState(() {
+                    if (isProfileImage) {
+                      _profileImage = File(pickedFile.path);
+                    } else {
+                      _idCardImage = File(pickedFile.path);
+                    }
+                  });
+                  onImageSelected(File(pickedFile.path));
+                }
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              leading: const FaIcon(FontAwesomeIcons.cameraRetro),
+              title: const Text('Camera'),
+              onTap: () async {
+                final pickedFile =
+                    await imagePicker.pickImage(source: ImageSource.camera);
+                if (pickedFile != null) {
+                  setState(() {
+                    if (isProfileImage) {
+                      _profileImage = File(pickedFile.path);
+                    } else {
+                      _idCardImage = File(pickedFile.path);
+                    }
+                  });
+                  onImageSelected(File(pickedFile.path));
+                }
+                Navigator.of(context).pop();
+              },
+            ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColor.secondary.withAlpha(25),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      height: 155,
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
+    return Column(
+      children: [
+        Text(
+          'Add Photos',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: AppColor.secondary,
+                fontSize: 18,
+              ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
+            Column(
               children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => _showImagePickerDialog('profile'),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColor.background,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      height: 100,
-                      child: IconButton(
-                        onPressed: null,
-                        icon: profileImage != null
-                            ? Image.file(profileImage!)
-                            : const FaIcon(FontAwesomeIcons.plus),
-                      ),
+                GestureDetector(
+                  onTap: () {
+                    _pickImage(context, widget.onProfileImageSelected, true);
+                    // pickImage();
+                  },
+                  child: Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: AppColor.secondary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
                     ),
+                    child: _profileImage == null
+                        ? const Center(
+                            child: Icon(
+                              Icons.add_a_photo_outlined,
+                              color: AppColor.primary,
+                              size: 40,
+                            ),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              _profileImage!,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                            ),
+                          ),
                   ),
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => _showImagePickerDialog('idCard'),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColor.background,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      height: 100,
-                      child: IconButton(
-                        onPressed: null,
-                        icon: idCardImage != null
-                            ? Image.file(idCardImage!)
-                            : const FaIcon(FontAwesomeIcons.plus),
-                      ),
-                    ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Profile Photo',
+                  style: TextStyle(
+                    color: AppColor.secondary,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 7),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Column(
               children: [
-                Text(
-                  'Profile Image',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: AppColor.toneThree,
+                GestureDetector(
+                  onTap: () =>
+                      _pickImage(context, widget.onIdCardImageSelected, false),
+                  child: Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: AppColor.secondary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: _idCardImage == null
+                        ? const Center(
+                            child: Icon(
+                              Icons.add_a_photo_outlined,
+                              color: AppColor.primary,
+                              size: 40,
+                            ),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              _idCardImage!,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                            ),
+                          ),
                   ),
                 ),
-                Text(
-                  'Id Card',
+                const SizedBox(height: 8),
+                const Text(
+                  'ID Card Photo',
                   style: TextStyle(
-                    fontSize: 16.0,
-                    color: AppColor.toneThree,
+                    color: AppColor.secondary,
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
-      ),
+      ],
     );
   }
 }

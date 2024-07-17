@@ -26,6 +26,7 @@ dependencies:
   shared_preferences: ^2.2.3
   toastification: ^2.0.0
   firebase_core: ^3.2.0
+  firebase_storage: ^12.1.1
 
   
 

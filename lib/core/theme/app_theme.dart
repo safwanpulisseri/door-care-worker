@@ -98,5 +98,17 @@ class AppTheme {
         ),
       ),
     ),
+    dialogTheme: const DialogTheme(
+      backgroundColor: AppColor.background,
+      titleTextStyle: TextStyle(
+        color: AppColor.secondary,
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
+      ),
+      contentTextStyle: TextStyle(
+        color: AppColor.secondary,
+        fontSize: 16,
+      ),
+    ),
   );
 }
