@@ -49,61 +49,34 @@ class _SignUpPageState extends State<SignUpPage> {
 
   File? profileImage;
   File? idCardImage;
-
-  // Future<String?> _uploadImage(File image) async {
-  //   String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference referenceRoot = FirebaseStorage.instance.ref();
-  //   Reference referenceDirImages =
-  //       referenceRoot.child('images'); // specify directory if needed
-  //   Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
-  //   try {
-  //     await referenceImageToUpload.putFile(image);
-  //     return await referenceImageToUpload.getDownloadURL();
-  //   } catch (error) {
-  //     // Handle errors
-  //     return null;
-  //   }
-  // }
-
-  final ImagePicker _imagePicker = ImagePicker();
   String? imageUrl;
-
-  // Future<void> pickImage() async {
-  //   try {
-  //     XFile? res = await _imagePicker.pickImage(source: ImageSource.camera);
-  //     if (res != null) {
-  //       await uploadImageToFirebase(File(res.path));
-  //     }
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: Colors.red,
-  //         content: Text('Failed to pick Image: $e'),
-  //       ),
-  //     );
-  //   }
-  // }
 
   Future<void> _uploadImageToFirebase(File image) async {
     try {
       Reference reference = FirebaseStorage.instance.ref().child(
             "images/${DateTime.now().millisecondsSinceEpoch}.png",
           );
-      await reference.putFile(image).whenComplete(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Colors.green,
-            content: Text('Upload Successfully Comepleted'),
-          ),
-        );
-      });
+      await reference.putFile(image).whenComplete(
+        () {
+          ToastificationWidget.show(
+            context: context,
+            type: ToastificationType.success,
+            title: 'Success',
+            description: 'Image Uploaded succesfully into firebase',
+            // backgroundColor: AppColor.toneEight,
+            textColor: AppColor.secondary,
+          );
+        },
+      );
       imageUrl = await reference.getDownloadURL();
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Text('Failed to upload Image: $e'),
-        ),
+      ToastificationWidget.show(
+        context: context,
+        type: ToastificationType.error,
+        title: 'Error',
+        description: 'Failed to Upload Image into Firebase',
+        // backgroundColor: AppColor.toneEight,
+        textColor: AppColor.secondary,
       );
     }
   }
@@ -322,23 +295,23 @@ class _SignUpPageState extends State<SignUpPage> {
                           );
                           return;
                         }
-                        //Upload image and get URLs
-                        //  String? profileImageUrl =
+                        //Upload image
+
                         await _uploadImageToFirebase(profileImage!);
-                        // String? idCardImageUrl =
+
                         await _uploadImageToFirebase(idCardImage!);
 
-                        // if (profileImageUrl == null || idCardImageUrl == null) {
-                        //   ToastificationWidget.show(
-                        //     context: context,
-                        //     type: ToastificationType.error,
-                        //     title: 'Upload Error',
-                        //     description:
-                        //         'Failed to upload images. Please try again.',
-                        //     textColor: AppColor.secondary,
-                        //   );
-                        //   return;
-                        // }
+                        if (profileImage == null || idCardImage == null) {
+                          ToastificationWidget.show(
+                            context: context,
+                            type: ToastificationType.error,
+                            title: 'Upload Error',
+                            description:
+                                'Failed to upload images. Please try again.',
+                            textColor: AppColor.secondary,
+                          );
+                          return;
+                        }
 
                         // Trigger sign-up event
                         context.read<AuthBloc>().add(

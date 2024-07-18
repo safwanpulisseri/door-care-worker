@@ -12,11 +12,6 @@ class UserModel {
   int? experience;
   String? profileImg;
   String? idCardImg;
-  int? wallet;
-  String? status;
-  bool? isBlocked;
-  DateTime? createdAt;
-  DateTime? updatedAt;
 
   UserModel({
     this.id,
@@ -29,11 +24,6 @@ class UserModel {
     this.experience,
     this.profileImg,
     this.idCardImg,
-    this.wallet,
-    this.status,
-    this.isBlocked,
-    this.createdAt,
-    this.updatedAt,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -54,13 +44,6 @@ class UserModel {
       experience: map['experience'] as int?,
       profileImg: map['profile_img'] as String?,
       idCardImg: map['idCard_img'] as String?,
-      wallet: map['wallet'] as int?,
-      status: map['status'] as String?,
-      isBlocked: map['isBlocked'] as bool?,
-      createdAt:
-          map['createdAt'] != null ? DateTime.parse(map['createdAt']) : null,
-      updatedAt:
-          map['updatedAt'] != null ? DateTime.parse(map['updatedAt']) : null,
     );
   }
 
@@ -76,11 +59,6 @@ class UserModel {
       'experience': experience,
       'profile_img': profileImg,
       'idCard_img': idCardImg,
-      'wallet': wallet,
-      'status': status,
-      'isBlocked': isBlocked,
-      'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 
@@ -103,12 +81,7 @@ class UserModel {
         other.district == district &&
         other.experience == experience &&
         other.profileImg == profileImg &&
-        other.idCardImg == idCardImg &&
-        other.wallet == wallet &&
-        other.status == status &&
-        other.isBlocked == isBlocked &&
-        other.createdAt == createdAt &&
-        other.updatedAt == updatedAt;
+        other.idCardImg == idCardImg;
   }
 
   @override
@@ -122,11 +95,6 @@ class UserModel {
         district.hashCode ^
         experience.hashCode ^
         profileImg.hashCode ^
-        idCardImg.hashCode ^
-        wallet.hashCode ^
-        status.hashCode ^
-        isBlocked.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode;
+        idCardImg.hashCode;
   }
 }
