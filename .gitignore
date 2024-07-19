@@ -3,8 +3,6 @@
 *.log
 *.pyc
 *.swp
-*.env
-*.firebase_options.dart
 .DS_Store
 .atom/
 .buildlog/
@@ -44,3 +42,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Ignore Firebase options file
+lib/firebase_options.dart
