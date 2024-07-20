@@ -4,7 +4,6 @@ import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:doorcareworker/core/widget/padding_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/widget/opacity_container.dart';
-import '../widget/join_our_team.dart';
 import '../widget/review_card.dart';
 import '../widget/service_card.dart';
 
@@ -57,7 +56,7 @@ class HomePage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      'Cleaning Services',
+                      'New Works',
                       style:
                           Theme.of(context).textTheme.headlineLarge?.copyWith(
                                 color: AppColor.secondary,
@@ -90,7 +89,22 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    const OpacityContainer(),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Customer Reviews',
+                      style:
+                          Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                color: AppColor.secondary,
+                              ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
                 SizedBox(
                   height: 200,
                   child: ListView(

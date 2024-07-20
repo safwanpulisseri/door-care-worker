@@ -44,7 +44,19 @@ class TabScreenThree extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Reference Code: #D-571224',
+                          'Bookong ID: #D-571224',
+                          style: TextStyle(
+                            color: AppColor.toneThree,
+                          ),
+                        ),
+                        Text(
+                          'User ID: #D-571224',
+                          style: TextStyle(
+                            color: AppColor.toneThree,
+                          ),
+                        ),
+                        Text(
+                          'Transaction ID: #D-571224',
                           style: TextStyle(
                             color: AppColor.toneThree,
                           ),
@@ -159,33 +171,66 @@ class TabScreenThree extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Divider(),
+                const SizedBox(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Total : ₹465.00',
-                      style: TextStyle(
-                        color: AppColor.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.toneEight.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColor.toneThree.withOpacity(0.7),
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SvgPicture.asset("assets/svg/booking_two.svg"),
                         ),
                       ),
-                      child: const Text(
-                        'Pay',
-                        style: TextStyle(color: AppColor.background),
+                    ),
+                    const SizedBox(width: 10),
+                    const SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        'Total : ₹465.00',
+                        style: TextStyle(
+                          color: AppColor.secondary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
+                const Divider(),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     const Text(
+                //       'Total : ₹465.00',
+                //       style: TextStyle(
+                //         color: AppColor.secondary,
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     ElevatedButton(
+                //       onPressed: () {},
+                //       style: ElevatedButton.styleFrom(
+                //         backgroundColor: AppColor.toneEight.withOpacity(0.8),
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(8),
+                //         ),
+                //       ),
+                //       child: const Text(
+                //         'Pay',
+                //         style: TextStyle(color: AppColor.background),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

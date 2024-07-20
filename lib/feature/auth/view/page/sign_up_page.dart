@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:toastification/toastification.dart';
 import '../../../../core/theme/color/app_color.dart';
-import '../../../../core/util/list_of_elements.dart';
 import '../../../../core/widget/toastification_widget.dart';
 import '../../../drawer/widget/appbar_widget.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
@@ -15,6 +13,8 @@ import '../widget/auth_button_widget.dart';
 import '../widget/auth_textformfield.dart';
 import '../widget/image_container.dart';
 import '../widget/loading_dialog.dart';
+import '../widget/select_district_widget.dart';
+import '../widget/select_service_widget.dart';
 import 'sign_in_page.dart';
 import 'verify_worker.dart';
 
@@ -50,36 +50,6 @@ class _SignUpPageState extends State<SignUpPage> {
   File? profileImage;
   File? idCardImage;
   String? imageUrl;
-
-  Future<void> _uploadImageToFirebase(File image) async {
-    try {
-      Reference reference = FirebaseStorage.instance.ref().child(
-            "images/${DateTime.now().millisecondsSinceEpoch}.png",
-          );
-      await reference.putFile(image).whenComplete(
-        () {
-          ToastificationWidget.show(
-            context: context,
-            type: ToastificationType.success,
-            title: 'Success',
-            description: 'Image Uploaded succesfully into firebase',
-            // backgroundColor: AppColor.toneEight,
-            textColor: AppColor.secondary,
-          );
-        },
-      );
-      imageUrl = await reference.getDownloadURL();
-    } catch (e) {
-      ToastificationWidget.show(
-        context: context,
-        type: ToastificationType.error,
-        title: 'Error',
-        description: 'Failed to Upload Image into Firebase',
-        // backgroundColor: AppColor.toneEight,
-        textColor: AppColor.secondary,
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,91 +123,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: 'Enter your email',
                     validator: AuthUtil.validateEmail,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      String? selectedDistrict = await showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SimpleDialog(
-                            title: const Text(
-                              'Select District',
-                              style: TextStyle(color: AppColor.secondary),
-                              textAlign: TextAlign.center,
-                            ),
-                            children: AppListElements.districts
-                                .map((String district) {
-                              return SimpleDialogOption(
-                                onPressed: () {
-                                  Navigator.pop(context, district);
-                                },
-                                child: Text(
-                                  district,
-                                  style: const TextStyle(
-                                      color: AppColor.secondary),
-                                  textAlign: TextAlign.center,
-                                ),
-                              );
-                            }).toList(),
-                          );
-                        },
-                      );
-                      if (selectedDistrict != null) {
-                        setState(() {
-                          _districtController.text = selectedDistrict;
-                        });
-                      }
-                    },
-                    child: AbsorbPointer(
-                      child: AuthTextFormField(
-                        controller: _districtController,
-                        labelText: 'District',
-                        hintText: 'Select your district',
-                        validator: AuthUtil.validateDistrict,
-                      ),
-                    ),
+                  SelectDistrictField(
+                    districtController: _districtController,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      String? selectedService = await showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SimpleDialog(
-                            title: const Text(
-                              'Select Service',
-                              style: TextStyle(color: AppColor.secondary),
-                              textAlign: TextAlign.center,
-                            ),
-                            children:
-                                AppListElements.services.map((String service) {
-                              return SimpleDialogOption(
-                                onPressed: () {
-                                  Navigator.pop(context, service);
-                                },
-                                child: Text(
-                                  service,
-                                  style: const TextStyle(
-                                      color: AppColor.secondary),
-                                  textAlign: TextAlign.center,
-                                ),
-                              );
-                            }).toList(),
-                          );
-                        },
-                      );
-                      if (selectedService != null) {
-                        setState(() {
-                          _serviceController.text = selectedService;
-                        });
-                      }
-                    },
-                    child: AbsorbPointer(
-                      child: AuthTextFormField(
-                        controller: _serviceController,
-                        labelText: 'Service',
-                        hintText: 'Select your service',
-                        validator: AuthUtil.validateService,
-                      ),
-                    ),
+                  SelectServiceField(
+                    serviceController: _serviceController,
                   ),
                   AuthTextFormField(
                     controller: _experienceController,
@@ -295,11 +185,16 @@ class _SignUpPageState extends State<SignUpPage> {
                           );
                           return;
                         }
-                        //Upload image
 
-                        await _uploadImageToFirebase(profileImage!);
+                        // Upload profile image and get its URL
+                        String? profileImageUrl = await _uploadImageToFirebase(
+                          profileImage!,
+                        );
 
-                        await _uploadImageToFirebase(idCardImage!);
+                        // Upload ID card image and get its URL
+                        String? idCardImageUrl = await _uploadImageToFirebase(
+                          idCardImage!,
+                        );
 
                         if (profileImage == null || idCardImage == null) {
                           ToastificationWidget.show(
@@ -325,8 +220,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                     0,
                                 district: _districtController.text.trim(),
                                 service: _serviceController.text.trim(),
-                                idCardImage: idCardImage!.path,
-                                profileImage: profileImage!.path,
+                                idCardImage: idCardImageUrl!,
+                                profileImage: profileImageUrl!,
                               ),
                             );
                       } else {
@@ -356,5 +251,35 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  Future<String?> _uploadImageToFirebase(File image) async {
+    try {
+      Reference reference = FirebaseStorage.instance.ref().child(
+            "images/${DateTime.now().millisecondsSinceEpoch}.png",
+          );
+      await reference.putFile(image).whenComplete(
+        () {
+          ToastificationWidget.show(
+            context: context,
+            type: ToastificationType.success,
+            title: 'Success',
+            description: 'Image Uploaded succesfully into firebase',
+            // backgroundColor: AppColor.toneEight,
+            textColor: AppColor.secondary,
+          );
+        },
+      );
+      return await reference.getDownloadURL();
+    } catch (e) {
+      ToastificationWidget.show(
+        context: context,
+        type: ToastificationType.error,
+        title: 'Error',
+        description: 'Failed to Upload Image into Firebase',
+        textColor: AppColor.secondary,
+      );
+      return null; // Return null in case of an error
+    }
   }
 }

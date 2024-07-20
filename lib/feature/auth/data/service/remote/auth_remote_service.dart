@@ -51,7 +51,7 @@ class AuthRemoteService {
     required String password,
     required String email,
     required String mobile,
-    required int experience,
+    required num experience,
     required String district,
     required String service,
     required String idCardImage,
@@ -66,11 +66,11 @@ class AuthRemoteService {
           'password': password,
           'email': email,
           'mobile': mobile,
-          'int': experience,
+          "experience": experience,
           'district': district,
           'service': service,
-          'idCardImage': idCardImage,
-          'profileImage': profileImage,
+          'idCard_img': idCardImage,
+          'profile_img': profileImage,
         },
       );
       return response;

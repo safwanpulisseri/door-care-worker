@@ -12,7 +12,6 @@ import '../util/auth_util.dart';
 import '../widget/auth_button_widget.dart';
 import '../widget/auth_textformfield.dart';
 import '../widget/loading_dialog.dart';
-import '../widget/terms_and_condition_widget.dart';
 import 'sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {

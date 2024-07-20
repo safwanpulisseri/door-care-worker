@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-            create: (context) => AuthRepo(
-                  AuthRemoteService(),
-                )),
+          create: (context) => AuthRepo(
+            AuthRemoteService(),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [

@@ -1,5 +1,6 @@
 import 'package:doorcareworker/core/widget/padding_booking.dart';
 import 'package:doorcareworker/core/widget/padding_widget.dart';
+import 'package:doorcareworker/feature/message/view/page/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -8,7 +9,7 @@ import '../../../../core/theme/color/app_color.dart';
 class TabScreenTwo extends StatelessWidget {
   const TabScreenTwo({super.key});
 
-  Widget _buildPendingContent() {
+  Widget _buildPendingContent(BuildContext context) {
     return Scaffold(
       body: PaddingWidgetBooking(
         child: Card(
@@ -163,7 +164,13 @@ class TabScreenTwo extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MessagePage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.toneSix.withOpacity(0.8),
                       shape: RoundedRectangleBorder(
@@ -187,7 +194,7 @@ class TabScreenTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildPendingContent(),
+      body: _buildPendingContent(context),
     );
   }
 }

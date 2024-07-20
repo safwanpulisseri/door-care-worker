@@ -52,7 +52,7 @@ class AuthRepo {
     required String password,
     required String email,
     required String mobile,
-    required int experience,
+    required num experience,
     required String district,
     required String service,
     required String idCardImage,
@@ -73,7 +73,7 @@ class AuthRepo {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData =
-            response.data['user'] as Map<String, dynamic>;
+            response.data['data'] as Map<String, dynamic>;
         final UserModel userModel = UserModel.fromMap(responseData);
         return userModel;
       } else {
