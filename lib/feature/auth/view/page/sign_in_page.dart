@@ -10,7 +10,7 @@ import '../../../navigation_menu/view/page/navigation_menu.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../util/auth_util.dart';
 import '../widget/auth_button_widget.dart';
-import '../widget/auth_textformfield.dart';
+import '../widget/auth_textformfield_widget.dart';
 import '../widget/loading_dialog.dart';
 import 'sign_up_page.dart';
 
@@ -42,7 +42,9 @@ class _SignInPageState extends State<SignInPage> {
         } else if (state is AuthSuccessState) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => const NavigationMenu()),
+            MaterialPageRoute(
+              builder: (_) => const NavigationMenu(),
+            ),
             (route) => false,
           );
           ToastificationWidget.show(

@@ -68,6 +68,12 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
+    log(map.length.toString());
+    map.forEach(
+      (key, value) {
+        log("key -> $key value -> $value");
+      },
+    );
     return UserModel(
       id: map['_id'] as String,
       name: map['name'] as String,

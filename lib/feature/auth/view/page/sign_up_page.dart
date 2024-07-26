@@ -10,8 +10,8 @@ import '../../../drawer/widget/appbar_widget.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../util/auth_util.dart';
 import '../widget/auth_button_widget.dart';
-import '../widget/auth_textformfield.dart';
-import '../widget/image_container.dart';
+import '../widget/auth_textformfield_widget.dart';
+import '../widget/image_container_widget.dart';
 import '../widget/loading_dialog.dart';
 import '../widget/select_district_widget.dart';
 import '../widget/select_service_widget.dart';
@@ -58,19 +58,19 @@ class _SignUpPageState extends State<SignUpPage> {
         if (state is AuthLoadingState) {
           log("loading...");
           LoadingDialog.show(context);
-        }
-        if (state is AuthSuccessState) {
+        } else if (state is AuthRegistrationSuccessState) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => const VerifyWorkerPage()),
+            MaterialPageRoute(
+              builder: (_) => const VerifyWorkerPage(),
+            ),
             (route) => false,
           );
           ToastificationWidget.show(
             context: context,
             type: ToastificationType.success,
             title: 'Success',
-            description: 'Successfully signed in!',
-            // backgroundColor: AppColor.toneEight,
+            description: 'Successfully signed up!',
             textColor: AppColor.secondary,
           );
         } else if (state is AuthFailState) {
@@ -79,8 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
             context: context,
             type: ToastificationType.error,
             title: 'Error',
-            description: 'Failed to sign in. Please try again.',
-            // backgroundColor: AppColor.toneSeven,
+            description: 'Failed to sign up. Please try again.',
             textColor: AppColor.secondary,
           );
         }
@@ -123,12 +122,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: 'Enter your email',
                     validator: AuthUtil.validateEmail,
                   ),
-                  SelectDistrictField(
-                    districtController: _districtController,
-                  ),
-                  SelectServiceField(
-                    serviceController: _serviceController,
-                  ),
+                  SelectDistrictField(districtController: _districtController),
+                  SelectServiceField(serviceController: _serviceController),
                   AuthTextFormField(
                     controller: _experienceController,
                     textInputType: TextInputType.number,
@@ -145,9 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     validator: AuthUtil.validatePassword,
                     showPasswordToggle: true,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   ImageContainerWidget(
                     onProfileImageSelected: (file) {
                       setState(() {
@@ -155,90 +148,83 @@ class _SignUpPageState extends State<SignUpPage> {
                       });
                     },
                     onIdCardImageSelected: (file) {
-                      setState(
-                        () {
-                          idCardImage = file;
-                        },
-                      );
+                      setState(() {
+                        idCardImage = file;
+                      });
                     },
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   AuthButton(
                     buttonText: 'Sign Up',
                     buttonCallback: () async {
                       if (_formKey.currentState!.validate()) {
-                        // Dismiss the keyboard
                         FocusManager.instance.primaryFocus?.unfocus();
 
-                        // Check if images are valid
-                        if (AuthUtil.validateImage(profileImage) != null ||
-                            AuthUtil.validateImage(idCardImage) != null) {
+                        String? profileImageValidationError =
+                            AuthUtil.validateImage(profileImage);
+                        String? idCardImageValidationError =
+                            AuthUtil.validateImage(idCardImage);
+
+                        if (profileImageValidationError != null ||
+                            idCardImageValidationError != null) {
                           ToastificationWidget.show(
                             context: context,
                             type: ToastificationType.error,
                             title: 'Validation Error',
-                            description: AuthUtil.validateImage(profileImage) ??
-                                AuthUtil.validateImage(idCardImage)!,
+                            description: profileImageValidationError ??
+                                idCardImageValidationError!,
                             textColor: AppColor.secondary,
                           );
                           return;
                         }
 
-                        // Upload profile image and get its URL
-                        String? profileImageUrl = await _uploadImageToFirebase(
-                          profileImage!,
-                        );
+                        String? profileImageUrl;
+                        if (profileImage != null) {
+                          profileImageUrl =
+                              await _uploadImageToFirebase(profileImage!);
+                        }
 
-                        // Upload ID card image and get its URL
-                        String? idCardImageUrl = await _uploadImageToFirebase(
-                          idCardImage!,
-                        );
+                        String? idCardImageUrl;
+                        if (idCardImage != null) {
+                          idCardImageUrl =
+                              await _uploadImageToFirebase(idCardImage!);
+                        }
 
-                        if (profileImage == null || idCardImage == null) {
+                        if (profileImageUrl == null || idCardImageUrl == null) {
                           ToastificationWidget.show(
                             context: context,
                             type: ToastificationType.error,
                             title: 'Upload Error',
                             description:
-                                'Failed to upload images. Please try again.',
+                                'Failed to upload one or more images. Please try again.',
                             textColor: AppColor.secondary,
                           );
                           return;
                         }
 
-                        // Trigger sign-up event
                         context.read<AuthBloc>().add(
                               AccountCreateAuthEvent(
-                                name: _nameController.text.trim(),
-                                mobile: _mobileController.text.trim(),
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text.trim(),
-                                experience: int.tryParse(
-                                        _experienceController.text.trim()) ??
-                                    0,
-                                district: _districtController.text.trim(),
-                                service: _serviceController.text.trim(),
-                                idCardImage: idCardImageUrl!,
-                                profileImage: profileImageUrl!,
+                                name: _nameController.text,
+                                mobile: _mobileController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                                experience:
+                                    num.tryParse(_experienceController.text) ??
+                                        0,
+                                district: _districtController.text,
+                                service: _serviceController.text,
+                                idCardImage: idCardImageUrl,
+                                profileImage: profileImageUrl,
                               ),
                             );
-                      } else {
-                        ToastificationWidget.show(
-                          context: context,
-                          type: ToastificationType.error,
-                          title: 'Validation Error',
-                          description: 'Please correct the errors in the form.',
-                          //  backgroundColor: AppColor.toneSeven,
-                          textColor: AppColor.secondary,
-                        );
                       }
                     },
                     textCallback: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (ctx) => const SignInPage()),
+                        MaterialPageRoute(
+                          builder: (ctx) => const SignInPage(),
+                        ),
                       );
                     },
                     navigationTitle: "Already have an Account? ",
@@ -258,18 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
       Reference reference = FirebaseStorage.instance.ref().child(
             "images/${DateTime.now().millisecondsSinceEpoch}.png",
           );
-      await reference.putFile(image).whenComplete(
-        () {
-          ToastificationWidget.show(
-            context: context,
-            type: ToastificationType.success,
-            title: 'Success',
-            description: 'Image Uploaded succesfully into firebase',
-            // backgroundColor: AppColor.toneEight,
-            textColor: AppColor.secondary,
-          );
-        },
-      );
+      await reference.putFile(image);
       return await reference.getDownloadURL();
     } catch (e) {
       ToastificationWidget.show(
@@ -279,7 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
         description: 'Failed to Upload Image into Firebase',
         textColor: AppColor.secondary,
       );
-      return null; // Return null in case of an error
+      return null;
     }
   }
 }

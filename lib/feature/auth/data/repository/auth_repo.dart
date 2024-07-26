@@ -1,25 +1,14 @@
 import 'dart:developer';
+import 'package:dio/dio.dart';
 import '../model/user_model.dart';
-import '../service/local/auth_local_service.dart';
 import '../service/remote/auth_remote_service.dart';
 
 class AuthRepo {
   final AuthRemoteService _authService;
-  //final AuthLocalService _authLocalService;
 
   AuthRepo(
     this._authService,
-    // this._authLocalService,
   );
-
-  // Future<UserModel?> getUser() async {
-  //   final UserModel? userModel = await _authLocalService.getUser();
-  //   if (userModel != null) {
-  //     return userModel;
-  //   } else {
-  //     return null;
-  //   }
-  // }
 
   Future<UserModel> emailSignIn({
     required String email,
@@ -35,7 +24,6 @@ class AuthRepo {
         final Map<String, dynamic> responseData =
             response.data['data'] as Map<String, dynamic>;
         final UserModel userModel = UserModel.fromMap(responseData);
-        // _authLocalService.saveUser(userModel);
         return userModel;
       } else {
         log('Login failed${response.statusCode}');
@@ -47,7 +35,7 @@ class AuthRepo {
     }
   }
 
-  Future<UserModel> userRegistration({
+  Future<Response<dynamic>> userRegistration({
     required String name,
     required String password,
     required String email,
@@ -72,12 +60,9 @@ class AuthRepo {
       );
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData =
-            response.data['data'] as Map<String, dynamic>;
-        final UserModel userModel = UserModel.fromMap(responseData);
-        return userModel;
+        return response;
       } else {
-        log('Login failed${response.statusCode}');
+        log('Registration failed${response.statusCode}');
         throw Exception();
       }
     } catch (e) {

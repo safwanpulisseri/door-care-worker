@@ -24,7 +24,7 @@ final class AccountCreateAuthEvent extends AuthEvent {
   final String password;
   final String email;
   final String mobile;
-  final int experience;
+  final num experience;
   final String district;
   final String service;
   final String idCardImage;

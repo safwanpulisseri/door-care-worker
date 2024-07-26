@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/util/list_of_elements.dart';
 import '../util/auth_util.dart';
-import 'auth_textformfield.dart';
+import 'auth_textformfield_widget.dart';
 
 class SelectDistrictField extends StatelessWidget {
   final TextEditingController districtController;

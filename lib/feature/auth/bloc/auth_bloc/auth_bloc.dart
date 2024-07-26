@@ -20,7 +20,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
           emit(AuthSuccessState(userModel: userModel));
         } catch (e) {
-          emit(AuthFailState());
+          log(e.toString());
+          emit(
+              const AuthFailState(message: 'An error occurred during sign in'));
         }
       },
     );
@@ -29,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (event, emit) async {
         emit(AuthLoadingState());
         try {
-          final UserModel userModel = await _authRepo.userRegistration(
+          var response = await _authRepo.userRegistration(
             name: event.name,
             password: event.password,
             email: event.email,
@@ -40,10 +42,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             idCardImage: event.idCardImage,
             profileImage: event.profileImage,
           );
-
-          emit(AuthSuccessState(userModel: userModel));
+          if (response.statusCode == 200) {
+            emit(AuthRegistrationSuccessState(data: response.data));
+          } else {
+            emit(AuthFailState(
+                message:
+                    'Registration failed with status code ${response.statusCode}'));
+            log('Registration failed: ${response.statusCode}');
+            throw Exception('Registration failed');
+          }
         } catch (e) {
-          emit(AuthFailState());
+          log(e.toString());
+          emit(const AuthFailState(
+              message: 'An error occurred during registration'));
         }
       },
     );

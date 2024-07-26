@@ -17,4 +17,12 @@ final class AuthSuccessState extends AuthState {
   const AuthSuccessState({required this.userModel});
 }
 
-final class AuthFailState extends AuthState {}
+final class AuthRegistrationSuccessState extends AuthState {
+  final dynamic data;
+  const AuthRegistrationSuccessState({this.data});
+}
+
+final class AuthFailState extends AuthState {
+  final String message;
+  const AuthFailState({this.message = 'An error occurred'});
+}
