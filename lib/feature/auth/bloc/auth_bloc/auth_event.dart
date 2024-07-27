@@ -9,6 +9,8 @@ sealed class AuthEvent extends Equatable {
 
 final class CheckUserEvent extends AuthEvent {}
 
+final class SignOutEvent extends AuthEvent {}
+
 final class EmailSignInAuthEvent extends AuthEvent {
   final String email;
   final String password;

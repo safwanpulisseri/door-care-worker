@@ -26,3 +26,5 @@ final class AuthFailState extends AuthState {
   final String message;
   const AuthFailState({this.message = 'An error occurred'});
 }
+
+final class AuthSignedOutState extends AuthState {}

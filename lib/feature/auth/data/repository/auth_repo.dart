@@ -21,6 +21,10 @@ class AuthRepo {
     }
   }
 
+  Future<void> signOut() async {
+    await _authLocalService.removeUser();
+  }
+
   Future<UserModel> emailSignIn({
     required String email,
     required String password,

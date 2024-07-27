@@ -1,8 +1,14 @@
+import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
+import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
 import 'package:doorcareworker/feature/drawer/page/user_details.dart';
 import 'package:doorcareworker/feature/drawer/page/wallet.dart';
 import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:toastification/toastification.dart';
+
+import '../../core/widget/toastification_widget.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -105,7 +111,24 @@ class CustomDrawer extends StatelessWidget {
                 DrawerItem(
                   icon: Icons.logout,
                   text: 'Sign Out',
-                  onTap: () {},
+                  onTap: () {
+                    context.read<AuthBloc>().add(SignOutEvent());
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignInPage(),
+                      ),
+                      (route) => false,
+                    );
+                    ToastificationWidget.show(
+                      context: context,
+                      type: ToastificationType.success,
+                      title: 'Success',
+                      description: 'You have been signed out successfully.',
+                      // backgroundColor: AppColor.toneEight,
+                      textColor: AppColor.secondary,
+                    );
+                  },
                 ),
               ],
             ),
