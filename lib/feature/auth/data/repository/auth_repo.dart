@@ -1,14 +1,25 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:doorcareworker/feature/auth/data/service/local/auth_local_service.dart';
 import '../model/user_model.dart';
 import '../service/remote/auth_remote_service.dart';
 
 class AuthRepo {
   final AuthRemoteService _authService;
+  final AuthLocalService _authLocalService;
 
   AuthRepo(
     this._authService,
+    this._authLocalService,
   );
+  Future<UserModel?> getUser() async {
+    final UserModel? userModel = await _authLocalService.getUser();
+    if (userModel != null) {
+      return userModel;
+    } else {
+      return null;
+    }
+  }
 
   Future<UserModel> emailSignIn({
     required String email,
@@ -24,6 +35,8 @@ class AuthRepo {
         final Map<String, dynamic> responseData =
             response.data['data'] as Map<String, dynamic>;
         final UserModel userModel = UserModel.fromMap(responseData);
+        // Insert the user into the local database
+        await _authLocalService.saveUser(userModel);
         return userModel;
       } else {
         log('Login failed${response.statusCode}');
