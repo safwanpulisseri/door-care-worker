@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "2219531149",
-    "project_id": "doorcareworker",
-    "storage_bucket": "doorcareworker.appspot.com"
+    "project_number": "608377486262",
+    "project_id": "doorcareworker-23af7",
+    "storage_bucket": "doorcareworker-23af7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:2219531149:android:e61341176efe8e5ffafbc4",
+        "mobilesdk_app_id": "1:608377486262:android:b675280230ee8a87d7df17",
         "android_client_info": {
           "package_name": "com.example.doorcareworker"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCcXiOxDH1yHTHRTvWo-f25rOQ_gJ_YxEk"
+          "current_key": "AIzaSyAy2CN3fZNZp4dF-L5jllAvspxDXINv1wQ"
         }
       ],
       "services": {

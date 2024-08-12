@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDQCpevB5M8LnFfccqyxW7KfGJoOkskRAE',
-    appId: '1:2219531149:web:a3f96789a7be80b4fafbc4',
-    messagingSenderId: '2219531149',
-    projectId: 'doorcareworker',
-    authDomain: 'doorcareworker.firebaseapp.com',
-    storageBucket: 'doorcareworker.appspot.com',
-    measurementId: 'G-T157YCB4HL',
+    apiKey: 'AIzaSyBPrA_IcVaxixeb0rtndGopZvDF_7Nppio',
+    appId: '1:608377486262:web:0a7910ee31680089d7df17',
+    messagingSenderId: '608377486262',
+    projectId: 'doorcareworker-23af7',
+    authDomain: 'doorcareworker-23af7.firebaseapp.com',
+    storageBucket: 'doorcareworker-23af7.appspot.com',
+    measurementId: 'G-3XP44FPEBK',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCcXiOxDH1yHTHRTvWo-f25rOQ_gJ_YxEk',
-    appId: '1:2219531149:android:e61341176efe8e5ffafbc4',
-    messagingSenderId: '2219531149',
-    projectId: 'doorcareworker',
-    storageBucket: 'doorcareworker.appspot.com',
+    apiKey: 'AIzaSyAy2CN3fZNZp4dF-L5jllAvspxDXINv1wQ',
+    appId: '1:608377486262:android:b675280230ee8a87d7df17',
+    messagingSenderId: '608377486262',
+    projectId: 'doorcareworker-23af7',
+    storageBucket: 'doorcareworker-23af7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBnqYYYvMuql4-4WWvdhwXTAvmnqRk3Aos',
-    appId: '1:2219531149:ios:b4cb448961958b73fafbc4',
-    messagingSenderId: '2219531149',
-    projectId: 'doorcareworker',
-    storageBucket: 'doorcareworker.appspot.com',
+    apiKey: 'AIzaSyCsHC07AOmxn5JGzELTDwFHD5WPFIufL0I',
+    appId: '1:608377486262:ios:9ac5aae7560a4f90d7df17',
+    messagingSenderId: '608377486262',
+    projectId: 'doorcareworker-23af7',
+    storageBucket: 'doorcareworker-23af7.appspot.com',
     iosBundleId: 'com.example.doorCare',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBnqYYYvMuql4-4WWvdhwXTAvmnqRk3Aos',
-    appId: '1:2219531149:ios:b4cb448961958b73fafbc4',
-    messagingSenderId: '2219531149',
-    projectId: 'doorcareworker',
-    storageBucket: 'doorcareworker.appspot.com',
+    apiKey: 'AIzaSyCsHC07AOmxn5JGzELTDwFHD5WPFIufL0I',
+    appId: '1:608377486262:ios:9ac5aae7560a4f90d7df17',
+    messagingSenderId: '608377486262',
+    projectId: 'doorcareworker-23af7',
+    storageBucket: 'doorcareworker-23af7.appspot.com',
     iosBundleId: 'com.example.doorCare',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDQCpevB5M8LnFfccqyxW7KfGJoOkskRAE',
-    appId: '1:2219531149:web:6e09789c23a3e271fafbc4',
-    messagingSenderId: '2219531149',
-    projectId: 'doorcareworker',
-    authDomain: 'doorcareworker.firebaseapp.com',
-    storageBucket: 'doorcareworker.appspot.com',
-    measurementId: 'G-74BYG0CYRB',
+    apiKey: 'AIzaSyBPrA_IcVaxixeb0rtndGopZvDF_7Nppio',
+    appId: '1:608377486262:web:b254f5e0d3f3426ed7df17',
+    messagingSenderId: '608377486262',
+    projectId: 'doorcareworker-23af7',
+    authDomain: 'doorcareworker-23af7.firebaseapp.com',
+    storageBucket: 'doorcareworker-23af7.appspot.com',
+    measurementId: 'G-FSS37CHJ4L',
   );
 }
