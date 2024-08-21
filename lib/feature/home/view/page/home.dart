@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/util/jason_asset.dart';
 import '../../../../core/widget/opacity_container.dart';
+import '../../../auth/bloc/auth_bloc/auth_bloc.dart';
 import '../../../auth/data/service/local/auth_local_service.dart';
 import '../../bloc/bloc/fetch_all_added_services_bloc.dart';
 import '../../data/repository/fetch_all_services_repo.dart.dart';
@@ -38,9 +39,18 @@ class HomePage extends StatelessWidget {
               },
             ),
           ),
-          title: const Text(
-            'HELLO SAFWAN 👋',
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+          title: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is AuthSuccessState) {
+                final userName = state.userModel.name;
+                return Text(
+                  'HELLO ${userName.toUpperCase()} 👋',
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
+                );
+              } else {
+                return const Text('HELLO USER 👋');
+              }
+            },
           ),
           backgroundColor: AppColor.background,
         ),

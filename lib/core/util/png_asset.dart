@@ -8,4 +8,5 @@ final class AppPngPath {
   static const homeCleanTwo = "assets/png/home_clean_two.png";
   static const joinOurTeam = "assets/png/join_our_team.png";
   static const masterCard = "assets/png/mastercard.png";
+  static const personImage = "assets/png/person_image.png";
 }
