@@ -7,7 +7,6 @@ import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
-
 import '../../core/widget/toastification_widget.dart';
 
 class CustomDrawer extends StatelessWidget {

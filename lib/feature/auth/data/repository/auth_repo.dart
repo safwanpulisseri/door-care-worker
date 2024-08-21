@@ -36,11 +36,15 @@ class AuthRepo {
       );
 
       if (response.statusCode == 200) {
+        final token = response.data['token'] as String;
+        log("Token received: $token");
+
         final Map<String, dynamic> responseData =
             response.data['data'] as Map<String, dynamic>;
         final UserModel userModel = UserModel.fromMap(responseData);
+
         // Insert the user into the local database
-        await _authLocalService.saveUser(userModel);
+        await _authLocalService.saveUser(userModel, token);
         return userModel;
       } else {
         log('Login failed${response.statusCode}');
