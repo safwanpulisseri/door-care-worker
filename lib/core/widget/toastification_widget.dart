@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
+import '../theme/color/app_color.dart';
+
 class ToastificationWidget {
   static void show({
     required BuildContext context,
@@ -20,12 +22,16 @@ class ToastificationWidget {
       autoCloseDuration: autoCloseDuration,
       title: Text(
         title,
-        style: TextStyle(color: textColor),
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: AppColor.secondary,
+            ),
       ),
       description: RichText(
         text: TextSpan(
           text: description,
-          style: TextStyle(color: textColor),
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: AppColor.secondary,
+              ),
         ),
       ),
       alignment: alignment,

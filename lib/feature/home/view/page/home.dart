@@ -9,6 +9,7 @@ import '../../../../core/util/jason_asset.dart';
 import '../../../../core/widget/opacity_container.dart';
 import '../../../auth/bloc/auth_bloc/auth_bloc.dart';
 import '../../../auth/data/service/local/auth_local_service.dart';
+import '../../../service/view/page/booked_service_details.dart';
 import '../../bloc/bloc/fetch_all_added_services_bloc.dart';
 import '../../data/repository/fetch_all_services_repo.dart.dart';
 import '../../data/service/remote/fetch_all_services_remote_service.dart';
@@ -103,14 +104,14 @@ class HomePage extends StatelessWidget {
                               final service = state.fetchAllServiceModel[index];
                               return GestureDetector(
                                 onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => ServiceDetailsPage(
-                                  //       service: service,
-                                  //     ),
-                                  //   ),
-                                  // );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ServiceDetailsPage(
+                                        service: service,
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: ServiceCard(
                                   image: service.serviceImg,
