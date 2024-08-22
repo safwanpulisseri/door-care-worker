@@ -95,32 +95,49 @@ class HomePage extends StatelessWidget {
                       if (state is FetchAllAddedServicesLoadingState) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is FetchAllAddedServicesSuccessState) {
-                        return SizedBox(
-                          height: 200,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.fetchAllServiceModel.length,
-                            itemBuilder: (context, index) {
-                              final service = state.fetchAllServiceModel[index];
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ServiceDetailsPage(
-                                        service: service,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: ServiceCard(
-                                  image: service.serviceImg,
-                                  title: service.serviceName,
+                        if (state.fetchAllServiceModel.isEmpty) {
+                          return Center(
+                            child: Column(
+                              children: [
+                                Lottie.asset(AppJasonPath.failedToFetch,
+                                    height: 150, width: 150),
+                                const Text(
+                                  'No Services Available',
+                                  style: TextStyle(color: AppColor.toneSeven),
                                 ),
-                              );
-                            },
-                          ),
-                        );
+                              ],
+                            ),
+                          );
+                        } else {
+                          return SizedBox(
+                            height: 200,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.fetchAllServiceModel.length,
+                              itemBuilder: (context, index) {
+                                final service =
+                                    state.fetchAllServiceModel[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ServiceDetailsPage(
+                                          service: service,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: ServiceCard(
+                                    image: service.serviceImg,
+                                    title: service.serviceName,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        }
                       } else if (state is FetchAllAddedServicesFailState) {
                         return Center(
                           child: Column(

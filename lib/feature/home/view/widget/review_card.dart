@@ -26,7 +26,7 @@ class ReviewCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'I am extremely pleased with the service\nprovided by FixIt. The technicians were\nhighly skilled and knowledgeable.',
+              'I am extremely pleased with the service\nprovided by Door Care. The technicians were\nhighly skilled and knowledgeable.',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColor.secondary, fontWeight: FontWeight.w400),
             ),

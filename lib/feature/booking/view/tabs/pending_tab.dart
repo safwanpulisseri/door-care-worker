@@ -2,7 +2,6 @@ import 'package:doorcareworker/core/widget/padding_booking.dart';
 import 'package:doorcareworker/core/widget/padding_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../core/theme/color/app_color.dart';
 
 class TabScreenOne extends StatelessWidget {
