@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import '../../../../core/theme/color/app_color.dart';
 
@@ -51,31 +51,19 @@ class LocationFetchingWidget extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(7.0),
-                    child: Icon(IconlyLight.location),
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset("assets/svg/booking_two.svg"),
                   ),
                 ),
               ),
               const SizedBox(width: 10),
-              Row(
-                children: [
-                  const Text(
-                    "Location : ",
-                    style: const TextStyle(
-                      color: AppColor.secondary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'Fetching location...',
-                    style: TextStyle(
-                      color: AppColor.secondary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              const Text(
+                'Fetching location...',
+                style: TextStyle(
+                  color: AppColor.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           );
@@ -93,31 +81,19 @@ class LocationFetchingWidget extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(7.0),
-                    child: Icon(IconlyLight.location),
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset("assets/svg/booking_two.svg"),
                   ),
                 ),
               ),
               const SizedBox(width: 10),
-              Row(
-                children: [
-                  const Text(
-                    "Location : ",
-                    style: const TextStyle(
-                      color: AppColor.secondary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'Error fetching location',
-                    style: TextStyle(
-                      color: AppColor.secondary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              const Text(
+                'Error fetching location',
+                style: TextStyle(
+                  color: AppColor.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           );
@@ -134,31 +110,21 @@ class LocationFetchingWidget extends StatelessWidget {
                       width: 1.0,
                     ),
                   ),
-                  padding: const EdgeInsets.all(7.0),
-                  child: Icon(IconlyLight.location),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset("assets/svg/booking_two.svg"),
+                  ),
                 ),
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Row(
-                  children: [
-                    const Text(
-                      "Location : ",
-                      style: const TextStyle(
-                        color: AppColor.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      snapshot.data ?? 'Unknown location',
-                      style: const TextStyle(
-                        color: AppColor.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  snapshot.data ?? 'Unknown location',
+                  style: const TextStyle(
+                    color: AppColor.secondary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
