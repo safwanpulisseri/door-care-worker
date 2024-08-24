@@ -45,5 +45,14 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Location Permissions -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is used to show relevant services nearby.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location is used to keep you updated about service availability, even when the app is not in use.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location is used to provide services at your location, both while the app is in use and in the background.</string>
+	
 </dict>
 </plist>

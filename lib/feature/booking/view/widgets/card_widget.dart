@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/util/png_asset.dart';
 import '../../../../core/widget/padding_widget.dart';
+import '../../../manageService/home/manage_service_home.dart';
 import '../../data/model/fetch_all_commited_service_model.dart';
 
 class CardWidget extends StatelessWidget {
@@ -160,6 +161,12 @@ class CardWidget extends StatelessWidget {
                     //         bookingId: service.id,
                     //       ),
                     //     );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ManageServiceHome(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primary,
