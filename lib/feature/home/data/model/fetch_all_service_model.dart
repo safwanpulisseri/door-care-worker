@@ -4,21 +4,28 @@ import 'dart:developer';
 class FetchAllServiceModel {
   String id;
   String userId;
+  String? workerId; // Nullable
   String serviceName;
   String description;
   num firstHourCharge;
   num laterHourCharge;
   DateTime date;
-  DateTime startTime;
-  DateTime endTime;
+  dynamic startTime; // Can be DateTime or String
+  dynamic endTime; // Can be DateTime or String
   double latitude;
   double longitude;
   String serviceImg;
   DateTime createdAt;
+  String? status;
+  num? price;
+  bool? payment;
+  String? paymentId;
+  DateTime? updatedAt; // Nullable
 
   FetchAllServiceModel({
     required this.id,
     required this.userId,
+    this.workerId,
     required this.serviceName,
     required this.description,
     required this.firstHourCharge,
@@ -30,26 +37,38 @@ class FetchAllServiceModel {
     required this.longitude,
     required this.serviceImg,
     required this.createdAt,
+    this.status,
+    this.price,
+    this.payment,
+    this.paymentId,
+    this.updatedAt,
   });
 
   FetchAllServiceModel copyWith({
     String? id,
     String? userId,
+    String? workerId,
     String? serviceName,
     String? description,
     num? firstHourCharge,
     num? laterHourCharge,
     DateTime? date,
-    DateTime? startTime,
-    DateTime? endTime,
+    dynamic startTime,
+    dynamic endTime,
     double? latitude,
     double? longitude,
     String? serviceImg,
     DateTime? createdAt,
+    String? status,
+    num? price,
+    bool? payment,
+    String? paymentId,
+    DateTime? updatedAt,
   }) {
     return FetchAllServiceModel(
       id: id ?? this.id,
       userId: userId ?? this.userId,
+      workerId: workerId ?? this.workerId,
       serviceName: serviceName ?? this.serviceName,
       description: description ?? this.description,
       firstHourCharge: firstHourCharge ?? this.firstHourCharge,
@@ -61,6 +80,11 @@ class FetchAllServiceModel {
       longitude: longitude ?? this.longitude,
       serviceImg: serviceImg ?? this.serviceImg,
       createdAt: createdAt ?? this.createdAt,
+      status: status ?? this.status,
+      price: price ?? this.price,
+      payment: payment ?? this.payment,
+      paymentId: paymentId ?? this.paymentId,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
@@ -68,17 +92,27 @@ class FetchAllServiceModel {
     return <String, dynamic>{
       '_id': id,
       'userId': userId,
+      'workerId': workerId,
       'service': serviceName,
       'description': description,
       'firstHourCharge': firstHourCharge,
       'laterHourCharge': laterHourCharge,
       'date': date.toIso8601String(),
-      'startTime': startTime.toIso8601String(),
-      'endTime': endTime.toIso8601String(),
+      'startTime': startTime is DateTime
+          ? (startTime as DateTime).toIso8601String()
+          : startTime,
+      'endTime': endTime is DateTime
+          ? (endTime as DateTime).toIso8601String()
+          : endTime,
       'latitude': latitude,
       'longitude': longitude,
       'serviceImg': serviceImg,
       'createdAt': createdAt.toIso8601String(),
+      'status': status,
+      'price': price,
+      'payment': payment,
+      'paymentId': paymentId,
+      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 
@@ -92,17 +126,29 @@ class FetchAllServiceModel {
     return FetchAllServiceModel(
       id: map['_id'] as String,
       userId: map['userId'] as String,
+      workerId: map['workerId'] as String?,
       serviceName: map['service'] as String,
       description: map['description'] as String,
       firstHourCharge: map['firstHourCharge'] as num,
       laterHourCharge: map['laterHourCharge'] as num,
       date: DateTime.parse(map['date'] as String),
-      startTime: DateTime.parse(map['startTime'] as String),
-      endTime: DateTime.parse(map['endTime'] as String),
+      startTime: map['startTime'] is String
+          ? map['startTime']
+          : DateTime.parse(map['startTime'] as String),
+      endTime: map['endTime'] is String
+          ? map['endTime']
+          : DateTime.parse(map['endTime'] as String),
       latitude: map['latitude'] as double,
       longitude: map['longitude'] as double,
       serviceImg: map['serviceImg'] as String,
       createdAt: DateTime.parse(map['createdAt'] as String),
+      status: map['status'] as String?,
+      price: map['price'] as num?,
+      payment: map['payment'] as bool?,
+      paymentId: map['paymentId'] as String?,
+      updatedAt: map['updatedAt'] != null
+          ? DateTime.parse(map['updatedAt'] as String)
+          : null,
     );
   }
 
@@ -113,7 +159,7 @@ class FetchAllServiceModel {
 
   @override
   String toString() {
-    return 'FetchAllServiceModel(id: $id, userId: $userId, serviceName: $serviceName, description: $description, firstHourCharge: $firstHourCharge, laterHourCharge: $laterHourCharge, date: $date, startTime: $startTime, endTime: $endTime, latitude: $latitude, longitude: $longitude, serviceImg: $serviceImg, createdAt: $createdAt,)';
+    return 'FetchAllServiceModel(id: $id, userId: $userId, workerId: $workerId, serviceName: $serviceName, description: $description, firstHourCharge: $firstHourCharge, laterHourCharge: $laterHourCharge, date: $date, startTime: $startTime, endTime: $endTime, latitude: $latitude, longitude: $longitude, serviceImg: $serviceImg, createdAt: $createdAt, status: $status, price: $price, payment: $payment, paymentId: $paymentId, updatedAt: $updatedAt)';
   }
 
   @override
@@ -122,6 +168,7 @@ class FetchAllServiceModel {
 
     return other.id == id &&
         other.userId == userId &&
+        other.workerId == workerId &&
         other.serviceName == serviceName &&
         other.description == description &&
         other.firstHourCharge == firstHourCharge &&
@@ -132,13 +179,19 @@ class FetchAllServiceModel {
         other.latitude == latitude &&
         other.longitude == longitude &&
         other.serviceImg == serviceImg &&
-        other.createdAt == createdAt;
+        other.createdAt == createdAt &&
+        other.status == status &&
+        other.price == price &&
+        other.payment == payment &&
+        other.paymentId == paymentId &&
+        other.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
         userId.hashCode ^
+        workerId.hashCode ^
         serviceName.hashCode ^
         description.hashCode ^
         firstHourCharge.hashCode ^
@@ -149,6 +202,11 @@ class FetchAllServiceModel {
         latitude.hashCode ^
         longitude.hashCode ^
         serviceImg.hashCode ^
-        createdAt.hashCode;
+        createdAt.hashCode ^
+        status.hashCode ^
+        price.hashCode ^
+        payment.hashCode ^
+        paymentId.hashCode ^
+        updatedAt.hashCode;
   }
 }

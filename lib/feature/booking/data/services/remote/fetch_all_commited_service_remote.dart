@@ -2,6 +2,9 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class FetchAllCommitedServiceRemote {
+  // final String _link =
+  //     "http://192.168.234.96:3000/api/worker/"; //For real device
+
   final String _link = "http://10.0.2.2:3000/api/worker/"; // For Android
 
   final Dio dio = Dio();

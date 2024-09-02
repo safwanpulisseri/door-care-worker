@@ -107,14 +107,13 @@ class ServiceDetailsPage extends StatelessWidget {
                     DetailRowWidget(
                       icon: IconlyLight.timeSquare,
                       label: 'Start Time: ',
-                      value: DateFormat.jm().format(service.startTime),
+                      value: service.startTime.toString(),
                     ),
                     const SizedBox(height: 10),
                     DetailRowWidget(
-                      icon: IconlyLight.timeSquare,
-                      label: 'End Time: ',
-                      value: DateFormat.jm().format(service.endTime),
-                    ),
+                        icon: IconlyLight.timeSquare,
+                        label: 'End Time: ',
+                        value: service.endTime.toString()),
                     const SizedBox(height: 10),
                     LocationFetchingWidget(
                       latitude: service.latitude,

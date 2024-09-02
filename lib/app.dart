@@ -1,3 +1,4 @@
+import 'package:doorcareworker/feature/manageService/chat/data/repository/createConversationRepo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'app_view.dart';
@@ -8,6 +9,8 @@ import 'feature/auth/data/repository/select_service_repo.dart';
 import 'feature/auth/data/service/local/auth_local_service.dart';
 import 'feature/auth/data/service/remote/auth_remote_service.dart';
 import 'feature/auth/data/service/remote/select_service_remote_service.dart';
+import 'feature/manageService/chat/bloc/bloc/create_conversation_bloc.dart';
+import 'feature/manageService/chat/data/service/remote/createConversationRemote.dart';
 import 'feature/service/bloc/bloc/commit_booked_service_bloc.dart';
 import 'feature/service/data/repository/commit_new_service_repo.dart';
 import 'feature/service/data/service/remote/commit_service_remote_service.dart';
@@ -35,7 +38,13 @@ class MyApp extends StatelessWidget {
             CommitServiceRemoteService(),
             AuthLocalService(),
           ),
-        )
+        ),
+        RepositoryProvider(
+          create: (context) => Createconversationrepo(
+            Createconversation(),
+            AuthLocalService(),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -50,6 +59,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 CommitBookedServiceBloc(context.read<CommitNewServiceRepo>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                CreateConversationBloc(context.read<Createconversationrepo>()),
           ),
         ],
         child: const MyAppView(),

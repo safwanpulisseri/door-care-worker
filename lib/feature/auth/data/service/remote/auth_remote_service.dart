@@ -3,6 +3,9 @@ import 'package:dio/dio.dart';
 
 class AuthRemoteService {
   final String _link = "http://10.0.2.2:3000/api/worker/"; // For android
+  // final String _link =
+  //     "http://192.168.234.96:3000/api/worker/"; //For real device
+
   //final String _link = "http://127.0.0.1:3000/api/worker/"; // For iOS simulator
   //final String _link = "http://127.0.0.1:3000/api/worker/"; // Adjusted for web
   final Dio dio = Dio();

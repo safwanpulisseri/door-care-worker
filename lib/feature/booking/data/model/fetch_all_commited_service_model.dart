@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:developer';
 
@@ -22,6 +21,10 @@ class FetchAllCommitedServiceModel {
   DateTime createdAt;
   DateTime updatedAt;
 
+  // New fields for userId and userName
+  String userId;
+  String userName;
+
   FetchAllCommitedServiceModel({
     required this.id,
     this.workerId,
@@ -41,6 +44,9 @@ class FetchAllCommitedServiceModel {
     required this.longitude,
     required this.createdAt,
     required this.updatedAt,
+    // Initialize the new fields
+    required this.userId,
+    required this.userName,
   });
 
   FetchAllCommitedServiceModel copyWith({
@@ -62,6 +68,8 @@ class FetchAllCommitedServiceModel {
     double? longitude,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? userId,
+    String? userName,
   }) {
     return FetchAllCommitedServiceModel(
       id: id ?? this.id,
@@ -82,6 +90,8 @@ class FetchAllCommitedServiceModel {
       longitude: longitude ?? this.longitude,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      userId: userId ?? this.userId,
+      userName: userName ?? this.userName,
     );
   }
 
@@ -105,6 +115,8 @@ class FetchAllCommitedServiceModel {
       'longitude': longitude,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
+      'userId': userId, // Include new fields in the map
+      'userName': userName,
     };
   }
 
@@ -134,6 +146,9 @@ class FetchAllCommitedServiceModel {
       longitude: map['longitude'] as double,
       createdAt: DateTime.parse(map['createdAt'] as String),
       updatedAt: DateTime.parse(map['updatedAt'] as String),
+      userId: map['userId']['_id']
+          as String, // Parse new fields from the nested map
+      userName: map['userId']['name'] as String,
     );
   }
 
@@ -145,7 +160,7 @@ class FetchAllCommitedServiceModel {
 
   @override
   String toString() {
-    return 'FetchAllBookedServiceModel(id: $id, workerId: $workerId, serviceName: $serviceName, serviceImg: $serviceImg, firstHourCharge: $firstHourCharge, laterHourCharge: $laterHourCharge, date: $date, startTime: $startTime, endTime: $endTime, description: $description, status: $status, price: $price, payment: $payment, paymentId: $paymentId, latitude: $latitude, longitude: $longitude, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FetchAllCommitedServiceModel(id: $id, workerId: $workerId, serviceName: $serviceName, serviceImg: $serviceImg, firstHourCharge: $firstHourCharge, laterHourCharge: $laterHourCharge, date: $date, startTime: $startTime, endTime: $endTime, description: $description, status: $status, price: $price, payment: $payment, paymentId: $paymentId, latitude: $latitude, longitude: $longitude, createdAt: $createdAt, updatedAt: $updatedAt, userId: $userId, userName: $userName)';
   }
 
   @override
@@ -169,7 +184,9 @@ class FetchAllCommitedServiceModel {
         other.latitude == latitude &&
         other.longitude == longitude &&
         other.createdAt == createdAt &&
-        other.updatedAt == updatedAt;
+        other.updatedAt == updatedAt &&
+        other.userId == userId &&
+        other.userName == userName;
   }
 
   @override
@@ -191,6 +208,8 @@ class FetchAllCommitedServiceModel {
         latitude.hashCode ^
         longitude.hashCode ^
         createdAt.hashCode ^
-        updatedAt.hashCode;
+        updatedAt.hashCode ^
+        userId.hashCode ^
+        userName.hashCode;
   }
 }

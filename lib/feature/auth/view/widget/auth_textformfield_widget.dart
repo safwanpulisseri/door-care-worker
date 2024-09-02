@@ -65,7 +65,7 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
                 : null, // Use prefixIcon if provided
             hintText: widget.hintText,
             hintStyle: const TextStyle(
-              color: Colors.grey,
+              color: AppColor.toneThree,
               fontSize: 16.0,
             ),
             border: OutlineInputBorder(
@@ -88,14 +88,14 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
                     },
                     icon: Icon(
                       _obscureText ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
+                      color: AppColor.toneThree,
                     ),
                   )
                 : null,
           ),
           style: const TextStyle(
             fontSize: 16.0,
-            color: Colors.black,
+            color: AppColor.secondary,
           ),
         ),
         const SizedBox(height: 7)
