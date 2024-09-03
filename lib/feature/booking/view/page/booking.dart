@@ -67,9 +67,9 @@ class _BookingPageState extends State<BookingPage>
               controller: _tabController,
               indicatorColor: Colors.transparent,
               tabs: [
-                _buildSegment('Pending', 0),
-                _buildSegment('Committed', 1),
-                _buildSegment('Completed', 2),
+                _buildSegment('Committed', 0),
+                _buildSegment('Completed', 1),
+                _buildSegment('X', 2),
               ],
             ),
           ),

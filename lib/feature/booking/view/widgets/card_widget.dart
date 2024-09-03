@@ -2,8 +2,11 @@ import 'package:doorcareworker/feature/booking/view/widgets/location_fetching_wi
 import 'package:doorcareworker/feature/manageService/chat/bloc/bloc/create_conversation_bloc.dart';
 import 'package:doorcareworker/feature/manageService/chat/view/chat_page.dart';
 import 'package:doorcareworker/feature/manageService/chat/view/chat_page_three.dart';
+import 'package:doorcareworker/feature/manageService/inc/view/page/generate_bill.dart';
+import 'package:doorcareworker/feature/manageService/validation/view/page/start_work_otp_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:toastification/toastification.dart';
@@ -191,8 +194,10 @@ class CardWidget extends StatelessWidget {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset("assets/svg/booking_one.svg"),
+                          padding: const EdgeInsets.all(7.0),
+                          child: Icon(
+                            IconlyLight.calendar,
+                          ),
                         ),
                       ),
                     ),
@@ -216,47 +221,72 @@ class CardWidget extends StatelessWidget {
                   height: 20,
                 ),
                 const Divider(),
-                Align(
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // context.read<CancelABookedPendingServiceBloc>().add(
-                      //       CancelBookedPendingServiceEvent(
-                      //         bookingId: service.id,
-                      //       ),
-                      //     );
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ManageServiceHome(
-                      //       latitude: service.latitude,
-                      //       longitude: service.longitude,
-                      //     ),
-                      //   ),
-                      // );
-                      // context.read<CreateConversationBloc>().add(
-                      //       CreateAConversationEvent(
-                      //         receiverId: service.userId,
-                      //       ),
-                      //     );
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => ChatScreen()));
-                      // Example usage
-                      _navigateToChatPage(service.workerId!, service.userId);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // context.read<CancelABookedPendingServiceBloc>().add(
+                        //       CancelBookedPendingServiceEvent(
+                        //         bookingId: service.id,
+                        //       ),
+                        //     );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => ManageServiceHome(
+                        //       latitude: service.latitude,
+                        //       longitude: service.longitude,
+                        //     ),
+                        //   ),
+                        // );
+                        // context.read<CreateConversationBloc>().add(
+                        //       CreateAConversationEvent(
+                        //         receiverId: service.userId,
+                        //       ),
+                        //     );
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => ChatScreen()));
+                        // Example usage
+                        _navigateToChatPage(service.workerId!, service.userId);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text(
+                        'Chat',
+                        style: TextStyle(color: AppColor.background),
                       ),
                     ),
-                    child: const Text(
-                      'Chat',
-                      style: TextStyle(color: AppColor.background),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GenerateBillPage(
+                              bookingId: service.id,
+                              firstHourCharge: service.firstHourCharge,
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text(
+                        'Start Work',
+                        style: TextStyle(color: AppColor.background),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,

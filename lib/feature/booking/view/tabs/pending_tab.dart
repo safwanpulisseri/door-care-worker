@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/util/jason_asset.dart';
 import '../../../auth/data/service/local/auth_local_service.dart';
-import '../../bloc/bloc/fetch_all_commited_service_bloc.dart';
+import '../../bloc/fetch_all_commited_service_bloc/fetch_all_commited_service_bloc.dart';
 import '../../data/repository/fetch_all_commited_service_repo.dart';
 import '../../data/services/remote/fetch_all_commited_service_remote.dart';
 import '../widgets/card_widget.dart';
