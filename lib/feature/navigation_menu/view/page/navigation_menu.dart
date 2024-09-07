@@ -3,6 +3,8 @@ import 'package:doorcareworker/feature/home/view/page/home.dart';
 import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 
+import '../../../drawer/home_drawer.dart';
+
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
 
@@ -16,6 +18,9 @@ class _HomeNavigationMenuState extends State<NavigationMenu> {
     const HomePage(),
     const BookingPage(),
   ];
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -25,6 +30,8 @@ class _HomeNavigationMenuState extends State<NavigationMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: CustomDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
