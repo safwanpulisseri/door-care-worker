@@ -37,16 +37,10 @@ class CustomDrawer extends StatelessWidget {
                           radius: 30,
                           backgroundColor: AppColor.background,
                           backgroundImage: user.profileImage.isNotEmpty
-                              ? NetworkImage(
-                                  user.profileImage,
-                                )
-                              : const AssetImage(
-                                  AppPngPath.personImage,
-                                ),
+                              ? NetworkImage(user.profileImage)
+                              : const AssetImage(AppPngPath.personImage),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -89,101 +83,105 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           Expanded(
-            child: ListView(
-              children: [
-                DrawerItem(
-                    icon: Icons.wallet,
-                    text: 'My Wallet',
-                    onTap: () {
-                      print("hai");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (contex) => WalletPage(),
-                        ),
-                      );
-                    }),
-                DrawerItem(
-                  icon: Icons.history,
-                  text: 'History',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.help_outline,
-                  text: 'How to use',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.notifications,
-                  text: 'Notification',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.privacy_tip,
-                  text: 'Privacy Policy',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.info,
-                  text: 'About us',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.support,
-                  text: 'Support',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.share,
-                  text: 'Share App',
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  icon: Icons.logout,
-                  text: 'Sign Out',
-                  onTap: () {
-                    context.read<AuthBloc>().add(SignOutEvent());
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignInPage(),
-                      ),
-                      (route) => false,
-                    );
-                    ToastificationWidget.show(
-                      context: context,
-                      type: ToastificationType.success,
-                      title: 'Success',
-                      description: 'You have been signed out successfully.',
-                      // backgroundColor: AppColor.toneEight,
-                      textColor: AppColor.secondary,
-                    );
-                  },
-                ),
-              ],
+            child: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                String userEmail = '';
+                if (state is AuthSuccessState) {
+                  userEmail = state.userModel.email;
+                }
+                return ListView(
+                  children: [
+                    DrawerItem(
+                      icon: Icons.wallet,
+                      text: 'My Wallet',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WalletPage(email: userEmail),
+                          ),
+                        );
+                      },
+                    ),
+                    DrawerItem(
+                      icon: Icons.history,
+                      text: 'History',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.help_outline,
+                      text: 'How to use',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.notifications,
+                      text: 'Notification',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.privacy_tip,
+                      text: 'Privacy Policy',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.info,
+                      text: 'About us',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.support,
+                      text: 'Support',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.share,
+                      text: 'Share App',
+                      onTap: () {},
+                    ),
+                    DrawerItem(
+                      icon: Icons.logout,
+                      text: 'Sign Out',
+                      onTap: () {
+                        context.read<AuthBloc>().add(SignOutEvent());
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInPage(),
+                          ),
+                          (route) => false,
+                        );
+                        ToastificationWidget.show(
+                          context: context,
+                          type: ToastificationType.success,
+                          title: 'Success',
+                          description: 'You have been signed out successfully.',
+                          textColor: AppColor.secondary,
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Container(
             decoration: BoxDecoration(
-                color: AppColor.toneThree.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(20)),
+              color: AppColor.toneThree.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(20),
+            ),
             height: 40,
             width: 250,
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.info_outline, color: AppColor.background),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: 10),
                 Text('Pulisseri Production',
                     style: TextStyle(color: AppColor.background)),
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           const Divider(
             thickness: 0.5,
             indent: 30,

@@ -4,21 +4,26 @@ import '../../model/user_model.dart';
 
 final class AuthLocalService {
   static const String _storageKey = 'user_data_and_token';
+  static const String _passwordKey = 'user_password';
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 
-  // Save user data and token
-  Future<void> saveUser(UserModel user, String token) async {
+  // Save user data, token and password
+  Future<void> saveUser(UserModel user, String token, String password) async {
     final Map<String, dynamic> userData = {
       'user': user.toJson(),
       'token': token,
     };
     final String userDataJson = jsonEncode(userData);
     await _secureStorage.write(key: _storageKey, value: userDataJson);
+
+    //Save user paswword
+    await _secureStorage.write(key: _passwordKey, value: password);
   }
 
-  // Remove user data and token
+  // Remove user data, token and password
   Future<void> removeUser() async {
     await _secureStorage.delete(key: _storageKey);
+    await _secureStorage.delete(key: _passwordKey);
   }
 
   // Check if user is logged in
@@ -46,5 +51,10 @@ final class AuthLocalService {
       return userData['token'];
     }
     return null;
+  }
+
+  // Get stored password
+  Future<String?> getPassword() async {
+    return await _secureStorage.read(key: _passwordKey);
   }
 }

@@ -30,6 +30,8 @@ class AuthRepo {
     required String password,
   }) async {
     try {
+      String userPassword = password;
+
       var response = await _authService.signIn(
         email: email,
         password: password,
@@ -44,7 +46,7 @@ class AuthRepo {
         final UserModel userModel = UserModel.fromMap(responseData);
 
         // Insert the user into the local database
-        await _authLocalService.saveUser(userModel, token);
+        await _authLocalService.saveUser(userModel, token, userPassword);
         return userModel;
       } else {
         log('Login failed${response.statusCode}');

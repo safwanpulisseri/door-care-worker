@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
+          create: (context) => AuthLocalService(),
+        ),
+        RepositoryProvider(
           create: (context) => AuthRepo(
             AuthRemoteService(),
             AuthLocalService(),
