@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/widget/toastification_widget.dart';
-import '../../../drawer/widget/appbar_widget.dart';
+import '../../../drawer/view/widget/appbar_widget.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../util/auth_util.dart';
 import '../widget/auth_button_widget.dart';

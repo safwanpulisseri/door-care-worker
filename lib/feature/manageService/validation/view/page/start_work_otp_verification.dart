@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../../core/theme/color/app_color.dart';
 import '../../../../auth/view/widget/auth_button_widget.dart';
-import '../../../../drawer/widget/appbar_widget.dart';
+import '../../../../drawer/view/widget/appbar_widget.dart';
 
 class OtpVerificationPage extends StatelessWidget {
   const OtpVerificationPage({super.key});

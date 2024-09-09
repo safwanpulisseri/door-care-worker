@@ -1,7 +1,7 @@
 import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
 import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
-import 'package:doorcareworker/feature/drawer/page/user_details.dart';
-import 'package:doorcareworker/feature/drawer/page/wallet.dart';
+import 'package:doorcareworker/feature/drawer/view/page/user_details.dart';
+import 'package:doorcareworker/feature/drawer/view/page/wallet.dart';
 import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,7 @@ class CustomDrawer extends StatelessWidget {
                 );
               } else {
                 return Text(
-                  'Failed Fetch User\'s DEtails',
+                  'Failed to Fetch Your Details',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                         color: AppColor.background,
                         fontSize: 17,
@@ -97,9 +97,11 @@ class CustomDrawer extends StatelessWidget {
                     onTap: () {
                       print("hai");
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (contex) => const WalletPage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (contex) => WalletPage(),
+                        ),
+                      );
                     }),
                 DrawerItem(
                   icon: Icons.history,

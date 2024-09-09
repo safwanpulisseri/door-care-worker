@@ -2,11 +2,10 @@ import 'package:doorcareworker/core/widget/padding_widget.dart';
 import 'package:doorcareworker/feature/auth/view/widget/auth_textformfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../core/theme/color/app_color.dart';
-import '../../../core/util/png_asset.dart';
-import '../../../core/widget/opacity_container.dart';
-import '../../auth/bloc/auth_bloc/auth_bloc.dart';
+import '../../../../core/theme/color/app_color.dart';
+import '../../../../core/util/png_asset.dart';
+import '../../../../core/widget/opacity_container.dart';
+import '../../../auth/bloc/auth_bloc/auth_bloc.dart';
 import '../widget/appbar_widget.dart';
 
 class UserDetailsPage extends StatelessWidget {
@@ -114,12 +113,14 @@ class UserDetailsPage extends StatelessWidget {
               ),
             );
           } else {
-            return Text(
-              'Failed Fetch User\'s DEtails',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: AppColor.background,
-                    fontSize: 17,
-                  ),
+            return Center(
+              child: Text(
+                'Failed to Fetch Your Details',
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: AppColor.background,
+                      fontSize: 17,
+                    ),
+              ),
             );
           }
         },
