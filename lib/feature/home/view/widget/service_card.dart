@@ -18,8 +18,7 @@ class ServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 230,
-      margin: const EdgeInsets.only(right: 20),
+      height: 250,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,7 +28,7 @@ class ServiceCard extends StatelessWidget {
               image,
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 170,
+              height: 190,
             ),
           ),
           const SizedBox(height: 8),

@@ -109,11 +109,17 @@ class CardWidgetTwo extends StatelessWidget {
                   ),
                   Chip(
                     side: BorderSide.none,
-                    label: const Text(
-                      'Pending',
-                      style: TextStyle(color: AppColor.toneSix),
+                    label: Text(
+                      service.payment ? 'Completed' : 'Pending',
+                      style: TextStyle(
+                        color: service.payment
+                            ? AppColor.toneEight
+                            : AppColor.toneSix,
+                      ),
                     ),
-                    backgroundColor: AppColor.toneSix.withOpacity(0.2),
+                    backgroundColor: service.payment
+                        ? AppColor.toneOne.withOpacity(0.7)
+                        : AppColor.toneSix.withOpacity(0.2),
                   ),
                 ],
               ),

@@ -1,13 +1,16 @@
 import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
 import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
-import 'package:doorcareworker/feature/drawer/view/page/user_details.dart';
-import 'package:doorcareworker/feature/drawer/view/page/wallet.dart';
+import 'package:doorcareworker/feature/drawer/view/page/user_details_page.dart';
+import 'package:doorcareworker/feature/drawer/view/page/wallet_amount_page.dart';
 import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:toastification/toastification.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/widget/toastification_widget.dart';
+import 'view/page/booking_history_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -40,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
                               ? NetworkImage(user.profileImage)
                               : const AssetImage(AppPngPath.personImage),
                         ),
-                        const SizedBox(width: 5),
+                        const SizedBox(width: 8),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -92,8 +95,8 @@ class CustomDrawer extends StatelessWidget {
                 return ListView(
                   children: [
                     DrawerItem(
-                      icon: Icons.wallet,
-                      text: 'My Wallet',
+                      icon: IconlyLight.wallet,
+                      text: 'Wallet',
                       onTap: () {
                         Navigator.push(
                           context,
@@ -104,43 +107,58 @@ class CustomDrawer extends StatelessWidget {
                       },
                     ),
                     DrawerItem(
-                      icon: Icons.history,
+                      icon: IconlyLight.bookmark,
                       text: 'History',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookingHistoryPage(),
+                          ),
+                        );
+                      },
                     ),
                     DrawerItem(
-                      icon: Icons.help_outline,
+                      icon: IconlyLight.activity,
                       text: 'How to use',
-                      onTap: () {},
+                      onTap: () async {
+                        await launchPrivacyPolicy();
+                      },
                     ),
+                    // DrawerItem(
+                    //   icon: Icons.notifications,
+                    //   text: 'Notification',
+                    //   onTap: () {},
+                    // ),
                     DrawerItem(
-                      icon: Icons.notifications,
-                      text: 'Notification',
-                      onTap: () {},
-                    ),
-                    DrawerItem(
-                      icon: Icons.privacy_tip,
+                      icon: IconlyLight.scan,
                       text: 'Privacy Policy',
-                      onTap: () {},
+                      onTap: () async {
+                        await launchPrivacyPolicy();
+                      },
                     ),
                     DrawerItem(
-                      icon: Icons.info,
+                      icon: IconlyLight.message,
+                      text: 'Terms & Conditions',
+                      onTap: () async {
+                        await launchPrivacyPolicy();
+                      },
+                    ),
+                    DrawerItem(
+                      icon: IconlyLight.infoSquare,
                       text: 'About us',
-                      onTap: () {},
+                      onTap: () async {
+                        await launchPrivacyPolicy();
+                      },
                     ),
+                    // DrawerItem(
+                    //   icon: Icons.share,
+                    //   text: 'Share App',
+                    //   onTap: () {},
+                    // ),
                     DrawerItem(
-                      icon: Icons.support,
-                      text: 'Support',
-                      onTap: () {},
-                    ),
-                    DrawerItem(
-                      icon: Icons.share,
-                      text: 'Share App',
-                      onTap: () {},
-                    ),
-                    DrawerItem(
-                      icon: Icons.logout,
-                      text: 'Sign Out',
+                      icon: IconlyLight.logout,
+                      text: 'Log Out',
                       onTap: () {
                         context.read<AuthBloc>().add(SignOutEvent());
                         Navigator.pushAndRemoveUntil(
@@ -166,7 +184,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              color: AppColor.toneThree.withOpacity(0.5),
+              color: AppColor.textfield.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             height: 40,
@@ -174,27 +192,41 @@ class CustomDrawer extends StatelessWidget {
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.info_outline, color: AppColor.background),
+                Icon(IconlyLight.infoSquare, color: AppColor.background),
                 SizedBox(width: 10),
                 Text('Pulisseri Production',
                     style: TextStyle(color: AppColor.background)),
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           const Divider(
             thickness: 0.5,
             indent: 30,
             endIndent: 30,
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('version number',
-                style: TextStyle(color: AppColor.toneThree)),
+          Text(
+            'version: 1.0.0+1',
+            style: TextStyle(
+              color: AppColor.toneThree,
+            ),
           ),
+          const SizedBox(height: 5),
         ],
       ),
     );
+  }
+
+  Future<void> launchPrivacyPolicy() async {
+    final Uri url = Uri.parse(
+        'https://www.termsfeed.com/live/8a6630b6-fbd7-4bd9-8c63-bd8fa04778f9');
+
+    try {
+      await launchUrl(url);
+    } catch (e) {
+      print('Error launching URL: $e');
+      // Handle the error as needed
+    }
   }
 }
 
@@ -213,8 +245,11 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: Colors.white),
-      title: Text(text, style: const TextStyle(color: Colors.white)),
+      leading: Icon(icon, color: AppColor.background),
+      title: Text(
+        text,
+        style: const TextStyle(color: AppColor.background),
+      ),
       onTap: onTap,
     );
   }

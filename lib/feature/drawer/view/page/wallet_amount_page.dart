@@ -64,7 +64,7 @@ class WalletPage extends StatelessWidget {
                           const OpacityContainer(),
                           const SizedBox(width: 10),
                           Text(
-                            'Wallet and History',
+                            'Wallet',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge
