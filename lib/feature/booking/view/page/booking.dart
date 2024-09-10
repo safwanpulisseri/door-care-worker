@@ -1,9 +1,8 @@
-import 'package:doorcareworker/feature/booking/view/tabs/committed_tab.dart';
-import 'package:doorcareworker/feature/booking/view/tabs/completed_tab.dart';
-import 'package:doorcareworker/feature/booking/view/tabs/pending_tab.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/widget/opacity_container.dart';
+import '../tabs/completed_tab.dart';
+import '../tabs/committed_tab.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({super.key});
@@ -20,7 +19,7 @@ class _BookingPageState extends State<BookingPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {
       setState(() {
         _selectedIndex = _tabController.index;
@@ -69,7 +68,6 @@ class _BookingPageState extends State<BookingPage>
               tabs: [
                 _buildSegment('Committed', 0),
                 _buildSegment('Completed', 1),
-                _buildSegment('X', 2),
               ],
             ),
           ),
@@ -78,9 +76,8 @@ class _BookingPageState extends State<BookingPage>
       body: TabBarView(
         controller: _tabController,
         children: const [
-          TabScreenOne(),
-          TabScreenTwo(),
-          TabScreenThree(),
+          DetailsOfCommittedServicePage(),
+          DetailsOfCompletedServicePage(),
         ],
       ),
     );

@@ -188,7 +188,6 @@ class CardWidgetTwo extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Divider(),
             ],
           ),
         ),
