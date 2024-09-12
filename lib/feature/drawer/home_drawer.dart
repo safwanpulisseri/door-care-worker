@@ -131,7 +131,7 @@ class CustomDrawer extends StatelessWidget {
                     //   onTap: () {},
                     // ),
                     DrawerItem(
-                      icon: IconlyLight.scan,
+                      icon: IconlyLight.paper,
                       text: 'Privacy Policy',
                       onTap: () async {
                         await launchPrivacyPolicy();
