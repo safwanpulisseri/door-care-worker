@@ -9,7 +9,7 @@ import '../../../../core/widget/padding_widget.dart';
 import '../../data/model/fetch_all_commited_service_model.dart';
 import 'location_fetching_widget.dart';
 
-class CardWidgetTwo extends StatelessWidget {
+class CardWidgetTwo extends StatefulWidget {
   const CardWidgetTwo({
     super.key,
     required this.service,
@@ -17,6 +17,12 @@ class CardWidgetTwo extends StatelessWidget {
 
   final FetchAllCommitedServiceModel service;
 
+  @override
+  State<CardWidgetTwo> createState() => _CardWidgetTwoState();
+}
+
+class _CardWidgetTwoState extends State<CardWidgetTwo> {
+  bool _isExpanded = false;
   @override
   Widget build(BuildContext context) {
     // Create an instance of NumberFormat to format the price
@@ -42,8 +48,8 @@ class CardWidgetTwo extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 35,
-                    backgroundImage: service.serviceImg.isNotEmpty
-                        ? NetworkImage(service.serviceImg)
+                    backgroundImage: widget.service.serviceImg.isNotEmpty
+                        ? NetworkImage(widget.service.serviceImg)
                         : const AssetImage(AppPngPath.homeCleanTwo),
                     // onBackgroundImageError:
                     //     (exception, stackTrace) {
@@ -51,24 +57,37 @@ class CardWidgetTwo extends StatelessWidget {
                     // },
                   ),
                   const SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        service.serviceName,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.service.serviceName,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Booking ID:${service.id}',
-                        style: const TextStyle(
-                          color: AppColor.toneThree,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isExpanded = !_isExpanded;
+                            });
+                          },
+                          child: Text(
+                            'Booking ID: ${widget.service.id}',
+                            style: const TextStyle(
+                              color: AppColor.toneThree,
+                            ),
+                            overflow: _isExpanded
+                                ? TextOverflow.visible
+                                : TextOverflow.ellipsis,
+                            maxLines: _isExpanded ? 2 : 1,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -89,7 +108,7 @@ class CardWidgetTwo extends StatelessWidget {
                   Chip(
                     side: BorderSide.none,
                     label: Text(
-                      service.status,
+                      widget.service.status,
                       style: const TextStyle(color: AppColor.toneEight),
                     ),
                     backgroundColor: AppColor.toneOne.withOpacity(0.7),
@@ -110,14 +129,14 @@ class CardWidgetTwo extends StatelessWidget {
                   Chip(
                     side: BorderSide.none,
                     label: Text(
-                      service.payment ? 'Completed' : 'Pending',
+                      widget.service.payment ? 'Completed' : 'Pending',
                       style: TextStyle(
-                        color: service.payment
+                        color: widget.service.payment
                             ? AppColor.toneEight
                             : AppColor.toneSix,
                       ),
                     ),
-                    backgroundColor: service.payment
+                    backgroundColor: widget.service.payment
                         ? AppColor.toneOne.withOpacity(0.7)
                         : AppColor.toneSix.withOpacity(0.2),
                   ),
@@ -145,7 +164,7 @@ class CardWidgetTwo extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    '₹ ${numberFormat.format(service.price)}',
+                    '₹ ${numberFormat.format(widget.service.price)}',
                     style: const TextStyle(
                       color: AppColor.secondary,
                       fontSize: 16,
@@ -177,7 +196,7 @@ class CardWidgetTwo extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    DateFormat('dd-MM-yyyy').format(service.createdAt),
+                    DateFormat('dd-MM-yyyy').format(widget.service.createdAt),
                     style: const TextStyle(
                       color: AppColor.secondary,
                       fontSize: 16,
@@ -188,8 +207,8 @@ class CardWidgetTwo extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               LocationFetchingWidget(
-                latitude: service.latitude,
-                longitude: service.longitude,
+                latitude: widget.service.latitude,
+                longitude: widget.service.longitude,
               ),
               const SizedBox(
                 height: 20,

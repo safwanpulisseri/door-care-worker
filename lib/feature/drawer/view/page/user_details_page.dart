@@ -31,85 +31,89 @@ class UserDetailsPage extends StatelessWidget {
             _experienceController.text = user.experience.toString();
             _serviceNameController.text = user.service;
             _districtController.text = user.district;
-            return PaddingWidget(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      const OpacityContainer(),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Profile',
-                        style:
-                            Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                  color: AppColor.secondary,
-                                  fontSize: 30,
-                                ),
-                      ),
-                      const Spacer(
-                        flex: 1,
-                      ),
-                      // ElevatedButton.icon(
-                      //   onPressed: () {},
-                      //   label: const Text('SAVE'),
-                      //   icon: const FaIcon(FontAwesomeIcons.pen,
-                      //       color: AppColor.primary),
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor: AppColor.background,
-                      //     foregroundColor: AppColor.primary,
-                      //     padding:
-                      //         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: AppColor.toneEleven,
-                    backgroundImage: user.profileImage.isNotEmpty
-                        ? NetworkImage(
-                            user.profileImage,
-                          )
-                        : const AssetImage(
-                            AppPngPath.personImage,
-                          ),
-                  ),
-                  AuthTextFormField(
-                    controller: _nameController,
-                    labelText: 'Name',
-                    hintText: 'Update your name',
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  AuthTextFormField(
-                    controller: _mobileNumberController,
-                    labelText: 'Mobile Number',
-                    hintText: 'Update your number',
-                  ),
-                  AuthTextFormField(
-                    controller: _emailController,
-                    labelText: 'Email',
-                    hintText: 'Update your email',
-                  ),
-                  AuthTextFormField(
-                    controller: _experienceController,
-                    labelText: 'Experience',
-                    hintText: 'Update your experience',
-                  ),
-                  AuthTextFormField(
-                    controller: _serviceNameController,
-                    labelText: 'Service',
-                    hintText: 'Update your service',
-                  ),
-                  AuthTextFormField(
-                    controller: _districtController,
-                    labelText: 'District',
-                    hintText: 'Update your district',
-                  ),
-                ],
+            return SingleChildScrollView(
+              child: PaddingWidget(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const OpacityContainer(),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Profile',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
+                                color: AppColor.secondary,
+                                fontSize: 30,
+                              ),
+                        ),
+                        const Spacer(
+                          flex: 1,
+                        ),
+                        // ElevatedButton.icon(
+                        //   onPressed: () {},
+                        //   label: const Text('SAVE'),
+                        //   icon: const FaIcon(FontAwesomeIcons.pen,
+                        //       color: AppColor.primary),
+                        //   style: ElevatedButton.styleFrom(
+                        //     backgroundColor: AppColor.background,
+                        //     foregroundColor: AppColor.primary,
+                        //     padding:
+                        //         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundColor: AppColor.toneEleven,
+                      backgroundImage: user.profileImage.isNotEmpty
+                          ? NetworkImage(
+                              user.profileImage,
+                            )
+                          : const AssetImage(
+                              AppPngPath.personImage,
+                            ),
+                    ),
+                    AuthTextFormField(
+                      controller: _nameController,
+                      labelText: 'Name',
+                      hintText: 'Update your name',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    AuthTextFormField(
+                      controller: _mobileNumberController,
+                      labelText: 'Mobile Number',
+                      hintText: 'Update your number',
+                    ),
+                    AuthTextFormField(
+                      controller: _emailController,
+                      labelText: 'Email',
+                      hintText: 'Update your email',
+                    ),
+                    AuthTextFormField(
+                      controller: _experienceController,
+                      labelText: 'Experience',
+                      hintText: 'Update your experience',
+                    ),
+                    AuthTextFormField(
+                      controller: _serviceNameController,
+                      labelText: 'Service',
+                      hintText: 'Update your service',
+                    ),
+                    AuthTextFormField(
+                      controller: _districtController,
+                      labelText: 'District',
+                      hintText: 'Update your district',
+                    ),
+                  ],
+                ),
               ),
             );
           } else {
