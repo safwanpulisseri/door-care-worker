@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../core/theme/color/app_color.dart';
 import '../../../../../core/util/jason_asset.dart';
 import '../../../../navigation_menu/view/page/navigation_menu.dart';
-import '../../../../onboarding/view/widget/cutom_elevated_button.dart';
+import '../../../../onboarding/view/widget/cutom_elevated_button_widget.dart';
 
 class BillGeneratedSuccessPage extends StatelessWidget {
   const BillGeneratedSuccessPage({super.key});

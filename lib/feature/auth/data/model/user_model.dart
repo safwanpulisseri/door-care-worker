@@ -13,7 +13,7 @@ class UserModel {
   String profileImage;
   String idCardImage;
   bool isBlocked;
-  num wallet; // New field for wallet
+  num wallet;
 
   UserModel({
     required this.id,
@@ -26,7 +26,7 @@ class UserModel {
     required this.profileImage,
     required this.idCardImage,
     required this.isBlocked,
-    required this.wallet, // Initialize wallet
+    required this.wallet,
   });
 
   UserModel copyWith({
@@ -40,7 +40,7 @@ class UserModel {
     String? profileImage,
     String? idCardImage,
     bool? isBlocked,
-    num? wallet, // Add wallet in copyWith
+    num? wallet,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -53,7 +53,7 @@ class UserModel {
       profileImage: profileImage ?? this.profileImage,
       idCardImage: idCardImage ?? this.idCardImage,
       isBlocked: isBlocked ?? this.isBlocked,
-      wallet: wallet ?? this.wallet, // Handle wallet in copyWith
+      wallet: wallet ?? this.wallet,
     );
   }
 
@@ -69,7 +69,7 @@ class UserModel {
       'profile_img': profileImage,
       'idCard_img': idCardImage,
       'isBlocked': isBlocked,
-      'wallet': wallet, // Include wallet in the map
+      'wallet': wallet,
     };
   }
 
@@ -91,7 +91,7 @@ class UserModel {
       profileImage: map['profile_img'] as String,
       idCardImage: map['idCard_img'] as String,
       isBlocked: map['isBlocked'] as bool,
-      wallet: map['wallet'] as num, // Map the wallet value
+      wallet: map['wallet'] as num,
     );
   }
 

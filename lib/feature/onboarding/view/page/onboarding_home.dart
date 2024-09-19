@@ -3,6 +3,7 @@ import 'package:onboarding/onboarding.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../auth/view/page/sign_in_page.dart';
 import '../const/onboarding_model_list.dart';
+import '../widget/animated_indicator_widget.dart';
 import '../widget/onboarding_model_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -67,48 +68,65 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           },
           buildFooter: (context, netDragDistance, pagesLength, currentIndex,
               setIndex, slideDirection) {
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: currentIndex == pagesLength - 1
-                  ? ElevatedButton(
-                      onPressed: () {
-                        print('Get Started button pressed');
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInPage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.primary,
-                        minimumSize: const Size(double.infinity, 50),
-                      ),
-                      child: const Text(
-                        "Get Started",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    )
-                  : Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          setIndex(currentIndex + 1);
-                        },
-                        child: Material(
-                          shape: const CircleBorder(),
-                          color: AppColor.primary,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.chevron_right_rounded,
-                              size: 35,
-                              color: AppColor.background,
-                            ),
-                            onPressed: () {
+            return Column(
+              children: [
+                DotsIndicator(
+                  dotsCount: OnboardingModelList.list.length,
+                  position: currentIndex,
+                  decorator: DotsDecorator(
+                    baseColor: AppColor.toneFive.withOpacity(0.2),
+                    activeColor: AppColor.primary.withOpacity(0.8),
+                    size: const Size(8.0, 8.0),
+                    activeSize: const Size(15.0, 8.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    spacing: const EdgeInsets.symmetric(horizontal: 4.0),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: currentIndex == pagesLength - 1
+                      ? ElevatedButton(
+                          onPressed: () {
+                            print('Get Started button pressed');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignInPage()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.primary,
+                            minimumSize: const Size(double.infinity, 50),
+                          ),
+                          child: const Text(
+                            "Get Started",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        )
+                      : Center(
+                          child: GestureDetector(
+                            onTap: () {
                               setIndex(currentIndex + 1);
                             },
+                            child: Material(
+                              shape: const CircleBorder(),
+                              color: AppColor.primary,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.chevron_right_rounded,
+                                  size: 35,
+                                  color: AppColor.background,
+                                ),
+                                onPressed: () {
+                                  setIndex(currentIndex + 1);
+                                },
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
+                ),
+              ],
             );
           },
           animationInMilliseconds: 500,

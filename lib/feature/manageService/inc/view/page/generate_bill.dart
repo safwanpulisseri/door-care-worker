@@ -5,12 +5,9 @@ import 'package:toastification/toastification.dart';
 import '../../../../../core/theme/color/app_color.dart';
 import '../../../../../core/widget/opacity_container.dart';
 import '../../../../../core/widget/toastification_widget.dart';
-import '../../../../auth/data/service/local/auth_local_service.dart';
 import '../../../../auth/view/widget/loading_dialog.dart';
 import '../../../../drawer/view/widget/appbar_widget.dart';
 import '../../bloc/bloc/generate_bill_service_bloc.dart';
-import '../../data/repository/generate_bill_repo.dart';
-import '../../data/services/remote/generate_bill_remote.dart';
 import '../widget/time_widget.dart';
 import 'package:intl/intl.dart';
 

@@ -1,5 +1,5 @@
-import '../../../../core/util/png_asset.dart';
 import '../model/onboarding_model.dart';
+import '../../../../core/util/png_asset.dart';
 
 final class OnboardingModelList {
   OnboardingModelList._();

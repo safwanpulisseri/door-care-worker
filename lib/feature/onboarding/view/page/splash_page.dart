@@ -1,11 +1,11 @@
-import 'package:doorcareworker/core/theme/color/app_color.dart';
-import 'package:doorcareworker/core/util/svg_asset.dart';
-import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
+import 'onboarding_home.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:doorcareworker/core/util/svg_asset.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
 import '../../../navigation_menu/view/page/navigation_menu.dart';
-import 'onboarding_home.dart';
+import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
