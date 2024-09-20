@@ -1,13 +1,12 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class FetchAllCommitedServiceRemote {
-  // final String _link =
-  //     "http://192.168.234.96:3000/api/worker/"; //For real device
-
-  final String _link = "http://10.0.2.2:3000/api/worker/"; // For Android
+  final String _link = dotenv.env['API_LINK']!;
 
   final Dio dio = Dio();
+
   Future<Response<dynamic>> fetchCommitedServiceDetails({
     required String token,
     required String workerId,

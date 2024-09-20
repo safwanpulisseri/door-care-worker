@@ -1,12 +1,39 @@
 import 'dart:developer';
+// import 'dart:io';
 import 'package:dio/dio.dart';
+// import 'package:dio/io.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class FetchAllPendingServicesRemoteService {
-  final String _link = "http://10.0.2.2:3000/api/worker/"; // For android
-  //final String _link = "http://127.0.0.1:3000/api/worker/"; // Adjusted for web
-  //final String _link = "http://127.0.0.1:3000/api/worker/"; // For iOS simulator
+  final String _link = dotenv.env['API_LINK']!;
 
   final Dio dio = Dio();
+
+//   FetchAllPendingServicesRemoteService() {
+//     dio.interceptors.add(
+//       InterceptorsWrapper(
+//         onRequest: (options, handler) {
+//           log('Request[${options.method}] => PATH: ${options.path} => DATA: ${options.data}');
+//           return handler.next(options);
+//         },
+//         onResponse: (response, handler) {
+//           log('Response[${response.statusCode}] => DATA: ${response.data}');
+//           return handler.next(response);
+//         },
+//         onError: (DioException e, handler) {
+//           log('Error[${e.response?.statusCode}] => MESSAGE: ${e.message}');
+//           return handler.next(e);
+//         },
+//       ),
+//     );
+// // Disable SSL verification for debugging purposes
+//     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+//       final HttpClient client = HttpClient();
+//       client.badCertificateCallback =
+//           (X509Certificate cert, String host, int port) => true;
+//       return client;
+//     };
+//   }
 
   Future<Response<dynamic>> fetchAllPendingServiceDetails({
     required String token,

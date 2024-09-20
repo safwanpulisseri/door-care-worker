@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.doorcareworker"
-        minSdk = flutter.minSdkVersion
+        minSdk = 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
