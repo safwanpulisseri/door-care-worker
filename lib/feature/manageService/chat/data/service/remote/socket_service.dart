@@ -1,10 +1,12 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketService {
+  final String chatApiLink = dotenv.env['CHAT_API_LINK']!;
   late IO.Socket socket;
 
   void initializeSocket(String userId) {
-    socket = IO.io('http://10.0.2.2:3000', <String, dynamic>{
+    socket = IO.io(chatApiLink, <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });

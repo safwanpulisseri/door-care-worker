@@ -1,11 +1,14 @@
 import 'dart:developer';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+final String chatApiLink = dotenv.env['CHAT_API_LINK']!;
 
 Future<Map<String, dynamic>> startConversation(
     String senderId, String receiverId) async {
   final response = await http.post(
-    Uri.parse('http://10.0.2.2:3000/api/chat/conversation'),
+    Uri.parse('$chatApiLink/api/chat/conversation'),
     headers: {'Content-Type': 'application/json'},
     body: json.encode({
       'senderId': senderId,

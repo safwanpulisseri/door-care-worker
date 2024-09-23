@@ -1,13 +1,13 @@
-import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:doorcareworker/feature/manageService/chat/data/service/remote/get_message.dart';
 import 'package:doorcareworker/feature/manageService/chat/data/service/remote/send_message.dart';
 import 'package:doorcareworker/feature/manageService/chat/data/service/remote/socket_service.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import '../../../../core/util/png_asset.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChatPageThree extends StatefulWidget {
   final String conversationId;
@@ -164,13 +164,24 @@ class _ChatPageState extends State<ChatPageThree> {
                   showDateHeader = !_isSameDay(createdAt, previousMessageDate);
                 }
 
+                String dateHeader;
+                if (_isSameDay(createdAt, DateTime.now())) {
+                  dateHeader = 'Today';
+                } else if (_isSameDay(
+                    createdAt, DateTime.now().subtract(Duration(days: 1)))) {
+                  dateHeader = 'Yesterday';
+                } else {
+                  dateHeader =
+                      DateFormat('EEEE, dd MMMM yyyy').format(createdAt);
+                }
+
                 return Column(
                   children: [
                     if (showDateHeader)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Text(
-                          DateFormat('EEEE, dd MMMM yyyy').format(createdAt),
+                          dateHeader,
                           style: TextStyle(
                             color: AppColor.secondary.withOpacity(0.6),
                             fontWeight: FontWeight.bold,
