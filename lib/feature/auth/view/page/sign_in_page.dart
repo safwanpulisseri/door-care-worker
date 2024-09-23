@@ -131,7 +131,6 @@ class _SignInPageState extends State<SignInPage> {
                           type: ToastificationType.error,
                           title: 'Validation Error',
                           description: 'Please correct the errors in the form.',
-                          //  backgroundColor: AppColor.toneSeven,
                           textColor: AppColor.secondary,
                         );
                       }

@@ -1,16 +1,16 @@
-import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
-import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
-import 'package:doorcareworker/feature/drawer/view/page/user_details_page.dart';
-import 'package:doorcareworker/feature/drawer/view/page/wallet_amount_page.dart';
-import 'package:doorcareworker/core/theme/color/app_color.dart';
-import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:flutter/material.dart';
+import 'view/page/booking_history_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:toastification/toastification.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../core/widget/toastification_widget.dart';
-import 'view/page/booking_history_page.dart';
+import 'package:doorcareworker/core/util/png_asset.dart';
+import 'package:doorcareworker/core/util/privacy_policy.dart';
+import 'package:doorcareworker/core/theme/color/app_color.dart';
+import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
+import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
+import 'package:doorcareworker/feature/drawer/view/page/user_details_page.dart';
+import 'package:doorcareworker/feature/drawer/view/page/wallet_amount_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -122,9 +122,10 @@ class CustomDrawer extends StatelessWidget {
                       icon: IconlyLight.activity,
                       text: 'How to use',
                       onTap: () async {
-                        await launchPrivacyPolicy();
+                        await PrivacyPolicy.launchPrivacyPolicy();
                       },
                     ),
+
                     // DrawerItem(
                     //   icon: Icons.notifications,
                     //   text: 'Notification',
@@ -134,21 +135,21 @@ class CustomDrawer extends StatelessWidget {
                       icon: IconlyLight.paper,
                       text: 'Privacy Policy',
                       onTap: () async {
-                        await launchPrivacyPolicy();
+                        await PrivacyPolicy.launchPrivacyPolicy();
                       },
                     ),
                     DrawerItem(
                       icon: IconlyLight.message,
                       text: 'Terms & Conditions',
                       onTap: () async {
-                        await launchPrivacyPolicy();
+                        await PrivacyPolicy.launchPrivacyPolicy();
                       },
                     ),
                     DrawerItem(
                       icon: IconlyLight.infoSquare,
                       text: 'About us',
                       onTap: () async {
-                        await launchPrivacyPolicy();
+                        await PrivacyPolicy.launchPrivacyPolicy();
                       },
                     ),
                     // DrawerItem(
@@ -215,18 +216,6 @@ class CustomDrawer extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Future<void> launchPrivacyPolicy() async {
-    final Uri url = Uri.parse(
-        'https://www.termsfeed.com/live/8a6630b6-fbd7-4bd9-8c63-bd8fa04778f9');
-
-    try {
-      await launchUrl(url);
-    } catch (e) {
-      print('Error launching URL: $e');
-      // Handle the error as needed
-    }
   }
 }
 

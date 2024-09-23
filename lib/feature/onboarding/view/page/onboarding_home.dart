@@ -61,6 +61,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                     ),
+                  if (currentIndex == 2)
+                    SizedBox(
+                      height: 65,
+                    ),
                 ],
               ),
             );

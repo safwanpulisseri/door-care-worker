@@ -40,6 +40,9 @@ class OnboardingPage extends StatelessWidget {
                 ),
             textAlign: TextAlign.center,
           ),
+          SizedBox(
+            height: 5,
+          ),
         ],
       ),
     );
