@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/util/png_asset.dart';
@@ -15,6 +16,7 @@ import '../../../../core/widget/toastification_widget.dart';
 import '../../../auth/view/widget/loading_dialog.dart';
 import '../../../manageService/chat/data/service/remote/start_chat.dart';
 import '../../data/model/fetch_all_commited_service_model.dart';
+import '../../provider/card_expanded_provider.dart';
 
 class CardWidget extends StatelessWidget {
   const CardWidget({
@@ -83,213 +85,230 @@ class CardWidget extends StatelessWidget {
           );
         }
       },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppColor.toneThree.withOpacity(0.4),
+      child: ChangeNotifierProvider(
+        create: (context) => CardState(),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: AppColor.toneThree.withOpacity(0.4),
+              ),
             ),
-          ),
-          child: PaddingWidget(
-            // padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 35,
-                      backgroundImage: service.serviceImg.isNotEmpty
-                          ? NetworkImage(service.serviceImg)
-                          : const AssetImage(AppPngPath.homeCleanTwo),
-                      // onBackgroundImageError:
-                      //     (exception, stackTrace) {
-                      //   // Optionally handle image loading errors here
-                      // },
-                    ),
-                    const SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          service.serviceName,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Booking ID:${service.id}',
-                          style: const TextStyle(
-                            color: AppColor.toneThree,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                const Divider(),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Work Status',
-                      style: TextStyle(
-                        color: AppColor.toneThree,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+            child: PaddingWidget(
+              // padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundImage: service.serviceImg.isNotEmpty
+                            ? NetworkImage(service.serviceImg)
+                            : const AssetImage(AppPngPath.homeCleanTwo),
+                        // onBackgroundImageError:
+                        //     (exception, stackTrace) {
+                        //   // Optionally handle image loading errors here
+                        // },
                       ),
-                    ),
-                    Chip(
-                      side: BorderSide.none,
-                      label: Text(
-                        '${service.status}ted',
-                        style: const TextStyle(color: AppColor.toneSix),
-                      ),
-                      backgroundColor: AppColor.toneSix.withOpacity(0.2),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Payment Status',
-                      style: TextStyle(
-                        color: AppColor.toneThree,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Chip(
-                      side: BorderSide.none,
-                      label: const Text(
-                        'Pending',
-                        style: TextStyle(color: AppColor.toneSix),
-                      ),
-                      backgroundColor: AppColor.toneSix.withOpacity(0.2),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColor.toneThree.withOpacity(0.7),
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: Icon(
-                            IconlyLight.calendar,
+                      const SizedBox(width: 10),
+                      Consumer<CardState>(
+                        builder: (context, cardState, _) => Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                service.serviceName,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  cardState.toggleExpanded();
+                                },
+                                child: Text(
+                                  'Booking ID: ${service.id}',
+                                  style: const TextStyle(
+                                    color: AppColor.toneThree,
+                                  ),
+                                  overflow: cardState.isExpanded
+                                      ? TextOverflow.visible
+                                      : TextOverflow.ellipsis,
+                                  maxLines: cardState.isExpanded ? 2 : 1,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      DateFormat('dd-MM-yyyy').format(service.createdAt),
-                      style: const TextStyle(
-                        color: AppColor.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                LocationFetchingWidget(
-                  latitude: service.latitude,
-                  longitude: service.longitude,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // context.read<CancelABookedPendingServiceBloc>().add(
-                        //       CancelBookedPendingServiceEvent(
-                        //         bookingId: service.id,
-                        //       ),
-                        //     );
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ManageServiceHome(
-                        //       latitude: service.latitude,
-                        //       longitude: service.longitude,
-                        //     ),
-                        //   ),
-                        // );
-                        // context.read<CreateConversationBloc>().add(
-                        //       CreateAConversationEvent(
-                        //         receiverId: service.userId,
-                        //       ),
-                        //     );
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => ChatScreen()));
-                        // Example usage
-                        _navigateToChatPage(service.workerId!, service.userId);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  const Divider(),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Work Status',
+                        style: TextStyle(
+                          color: AppColor.toneThree,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      child: const Text(
-                        'Chat',
-                        style: TextStyle(color: AppColor.background),
+                      Chip(
+                        side: BorderSide.none,
+                        label: Text(
+                          '${service.status}ted',
+                          style: const TextStyle(color: AppColor.toneSix),
+                        ),
+                        backgroundColor: AppColor.toneSix.withOpacity(0.2),
                       ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => GenerateBillPage(
-                              bookingId: service.id,
-                              firstHourCharge: service.firstHourCharge,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Payment Status',
+                        style: TextStyle(
+                          color: AppColor.toneThree,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Chip(
+                        side: BorderSide.none,
+                        label: const Text(
+                          'Pending',
+                          style: TextStyle(color: AppColor.toneSix),
+                        ),
+                        backgroundColor: AppColor.toneSix.withOpacity(0.2),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColor.toneThree.withOpacity(0.7),
+                              width: 1.0,
                             ),
                           ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          child: Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Icon(
+                              IconlyLight.calendar,
+                            ),
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'Start Work',
-                        style: TextStyle(color: AppColor.background),
+                      const SizedBox(width: 10),
+                      Text(
+                        DateFormat('dd-MM-yyyy').format(service.createdAt),
+                        style: const TextStyle(
+                          color: AppColor.secondary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  LocationFetchingWidget(
+                    latitude: service.latitude,
+                    longitude: service.longitude,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // context.read<CancelABookedPendingServiceBloc>().add(
+                          //       CancelBookedPendingServiceEvent(
+                          //         bookingId: service.id,
+                          //       ),
+                          //     );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => ManageServiceHome(
+                          //       latitude: service.latitude,
+                          //       longitude: service.longitude,
+                          //     ),
+                          //   ),
+                          // );
+                          // context.read<CreateConversationBloc>().add(
+                          //       CreateAConversationEvent(
+                          //         receiverId: service.userId,
+                          //       ),
+                          //     );
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => ChatScreen()));
+                          // Example usage
+                          _navigateToChatPage(
+                              service.workerId!, service.userId);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text(
+                          'Chat',
+                          style: TextStyle(color: AppColor.background),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GenerateBillPage(
+                                bookingId: service.id,
+                                firstHourCharge: service.firstHourCharge,
+                              ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text(
+                          'Start Work',
+                          style: TextStyle(color: AppColor.background),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

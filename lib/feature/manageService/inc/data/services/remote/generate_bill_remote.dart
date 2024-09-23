@@ -1,8 +1,9 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class GenerateBillRemoteService {
-  final String _link = "http://10.0.2.2:3000/api/worker/"; // For Android
+  final String _link = dotenv.env['API_LINK']!;
 
   final Dio dio = Dio();
   Future<Response<dynamic>> generateBillRemote({
