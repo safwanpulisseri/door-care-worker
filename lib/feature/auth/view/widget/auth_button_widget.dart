@@ -39,14 +39,14 @@ class AuthButton extends StatelessWidget {
                 navigationTitle,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       color: AppColor.secondary,
-                      fontSize: 18,
+                      fontSize: 15,
                     ),
               ),
               Text(
                 navigationSubtitle,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       color: AppColor.primary,
-                      fontSize: 18,
+                      fontSize: 15,
                     ),
               ),
             ],

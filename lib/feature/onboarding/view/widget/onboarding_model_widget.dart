@@ -15,12 +15,14 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            model.image,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
+          Flexible(
+            child: Image.asset(
+              model.image,
+              width: MediaQuery.of(context).size.width,
+              //height: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
           ),
-          const SizedBox(height: 20),
           Text(
             model.title,
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -30,7 +32,7 @@ class OnboardingPage extends StatelessWidget {
                 ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Text(
             model.subtitle,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(

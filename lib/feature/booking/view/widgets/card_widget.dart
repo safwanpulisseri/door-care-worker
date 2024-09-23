@@ -3,11 +3,9 @@ import 'package:doorcareworker/feature/manageService/chat/bloc/bloc/create_conve
 import 'package:doorcareworker/feature/manageService/chat/view/chat_page.dart';
 import 'package:doorcareworker/feature/manageService/chat/view/chat_page_three.dart';
 import 'package:doorcareworker/feature/manageService/inc/view/page/generate_bill.dart';
-import 'package:doorcareworker/feature/manageService/validation/view/page/start_work_otp_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:toastification/toastification.dart';
 import '../../../../core/theme/color/app_color.dart';

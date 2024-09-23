@@ -5,7 +5,6 @@ import 'package:doorcareworker/core/theme/color/app_color.dart';
 import '../../../navigation_menu/view/page/navigation_menu.dart';
 import '../bloc/bloc/create_conversation_bloc.dart';
 import '../data/model/conversation_model.dart';
-import '../data/model/get_all_message_model.dart';
 
 class ChatPage extends StatefulWidget {
   final ConversationModel conversation;

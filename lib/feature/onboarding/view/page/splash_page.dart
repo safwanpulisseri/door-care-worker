@@ -41,7 +41,9 @@ class SplashPage extends StatelessWidget {
             child: Column(
               children: [
                 const Spacer(flex: 4),
-                SvgPicture.asset(AppSvgPath.splashLogo),
+                SvgPicture.asset(
+                  AppSvgPath.splashLogo,
+                ),
                 const Spacer(
                   flex: 1,
                 )

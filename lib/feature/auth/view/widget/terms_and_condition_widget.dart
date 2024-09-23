@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'navigation_text.dart';
 
 class TermsAndConditionsWidget extends StatelessWidget {
-  final bool animate;
+  //final bool animate;
   const TermsAndConditionsWidget({
-    this.animate = true,
+    //  this.animate = true,
     super.key,
   });
 
