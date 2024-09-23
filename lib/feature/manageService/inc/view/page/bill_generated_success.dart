@@ -60,7 +60,7 @@ class BillGeneratedSuccessPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (ctx) => const NavigationMenu(),
+                    builder: (ctx) => HomeNavigationMenu(),
                   ),
                 );
               },

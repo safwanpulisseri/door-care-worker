@@ -90,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NavigationMenu()),
+                MaterialPageRoute(builder: (context) => HomeNavigationMenu()),
               );
             },
             icon: Icon(

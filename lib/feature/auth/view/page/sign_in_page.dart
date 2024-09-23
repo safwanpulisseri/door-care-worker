@@ -44,7 +44,7 @@ class _SignInPageState extends State<SignInPage> {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (_) => const NavigationMenu(),
+              builder: (_) => HomeNavigationMenu(),
             ),
             (route) => false,
           );

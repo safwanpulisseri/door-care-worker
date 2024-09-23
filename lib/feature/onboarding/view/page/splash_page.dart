@@ -18,7 +18,7 @@ class SplashPage extends StatelessWidget {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => NavigationMenu(),
+              builder: (context) => HomeNavigationMenu(),
             ),
             (route) => false,
           );

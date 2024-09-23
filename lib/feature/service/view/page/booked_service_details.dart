@@ -30,7 +30,7 @@ class ServiceDetailsPage extends StatelessWidget {
         } else if (state is CommitBookedServiceSuccessState) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => NavigationMenu()),
+            MaterialPageRoute(builder: (_) => HomeNavigationMenu()),
             (route) => false,
           );
           ToastificationWidget.show(

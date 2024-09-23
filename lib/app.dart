@@ -6,6 +6,7 @@ import 'feature/auth/data/repository/auth_repo.dart';
 import 'feature/auth/data/repository/select_service_repo.dart';
 import 'feature/auth/data/service/local/auth_local_service.dart';
 import 'feature/auth/data/service/remote/auth_remote_service.dart';
+import 'feature/navigation_menu/bloc/bloc/navigation_bloc.dart';
 import 'feature/service/bloc/bloc/commit_booked_service_bloc.dart';
 import 'feature/service/data/repository/commit_new_service_repo.dart';
 import 'feature/auth/bloc/select_service_bloc/select_service_bloc.dart';
@@ -79,6 +80,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => GenerateBillServiceBloc(
                 context.read<GenerateBillServiceRepo>()),
+          ),
+          BlocProvider(
+            create: (context) => NavigationBloc(),
           ),
         ],
         child: const MyAppView(),
