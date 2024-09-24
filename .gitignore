@@ -43,9 +43,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Ignore specific files
-ios/Runner/AppDelegate.swift
-android/app/src/main/AndroidManifest.xml
-
 # Firebase related
 lib/firebase_options.dart
