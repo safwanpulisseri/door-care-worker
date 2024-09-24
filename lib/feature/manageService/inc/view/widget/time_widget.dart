@@ -11,7 +11,7 @@ class TimePickerWidget extends StatefulWidget {
   final TextEditingController workedTimeController;
 
   @override
-  _TimePickerWidgetState createState() => _TimePickerWidgetState();
+  createState() => _TimePickerWidgetState();
 }
 
 class _TimePickerWidgetState extends State<TimePickerWidget> {
@@ -43,7 +43,7 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
+              const Text(
                 'Select Your Worked Time',
                 style: TextStyle(
                   color: AppColor.secondary,

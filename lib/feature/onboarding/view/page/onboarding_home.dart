@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
 import '../../../../core/theme/color/app_color.dart';
@@ -10,7 +11,7 @@ class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
@@ -62,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   if (currentIndex == 2)
-                    SizedBox(
+                    const SizedBox(
                       height: 65,
                     ),
                 ],
@@ -91,7 +92,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: currentIndex == pagesLength - 1
                       ? ElevatedButton(
                           onPressed: () {
-                            print('Get Started button pressed');
+                            if (kDebugMode) {
+                              print('Get Started button pressed');
+                            }
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

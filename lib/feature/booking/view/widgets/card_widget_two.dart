@@ -150,8 +150,8 @@ class CardWidgetTwo extends StatelessWidget {
                             width: 1.0,
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(7.0),
                           child: Icon(
                             IconlyLight.wallet,
                           ),
@@ -182,8 +182,8 @@ class CardWidgetTwo extends StatelessWidget {
                             width: 1.0,
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(7.0),
                           child: Icon(
                             IconlyLight.calendar,
                           ),

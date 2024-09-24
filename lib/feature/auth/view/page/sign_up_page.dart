@@ -192,6 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                         if (profileImageUrl == null || idCardImageUrl == null) {
                           ToastificationWidget.show(
+                            // ignore: use_build_context_synchronously
                             context: context,
                             type: ToastificationType.error,
                             title: 'Upload Error',
@@ -202,6 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           return;
                         }
 
+                        // ignore: use_build_context_synchronously
                         context.read<AuthBloc>().add(
                               AccountCreateAuthEvent(
                                 name: _nameController.text,
@@ -248,6 +250,7 @@ class _SignUpPageState extends State<SignUpPage> {
       return await reference.getDownloadURL();
     } catch (e) {
       ToastificationWidget.show(
+        // ignore: use_build_context_synchronously
         context: context,
         type: ToastificationType.error,
         title: 'Error',

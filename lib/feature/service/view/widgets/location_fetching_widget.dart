@@ -50,24 +50,24 @@ class LocationFetchingWidget extends StatelessWidget {
                       width: 1.0,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
                     child: Icon(IconlyLight.location),
                   ),
                 ),
               ),
               const SizedBox(width: 10),
-              Row(
+              const Row(
                 children: [
-                  const Text(
+                  Text(
                     "Location : ",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColor.secondary,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'Fetching location...',
                     style: TextStyle(
                       color: AppColor.secondary,
@@ -92,24 +92,24 @@ class LocationFetchingWidget extends StatelessWidget {
                       width: 1.0,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
                     child: Icon(IconlyLight.location),
                   ),
                 ),
               ),
               const SizedBox(width: 10),
-              Row(
+              const Row(
                 children: [
-                  const Text(
+                  Text(
                     "Location : ",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColor.secondary,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'Error fetching location',
                     style: TextStyle(
                       color: AppColor.secondary,
@@ -135,7 +135,7 @@ class LocationFetchingWidget extends StatelessWidget {
                     ),
                   ),
                   padding: const EdgeInsets.all(7.0),
-                  child: Icon(IconlyLight.location),
+                  child: const Icon(IconlyLight.location),
                 ),
               ),
               const SizedBox(width: 10),
@@ -144,7 +144,7 @@ class LocationFetchingWidget extends StatelessWidget {
                   children: [
                     const Text(
                       "Location : ",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: AppColor.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

@@ -9,7 +9,7 @@ import 'package:doorcareworker/core/widget/padding_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AboutUsPage extends StatelessWidget {
-  AboutUsPage({super.key});
+  const AboutUsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class AboutUsPage extends StatelessWidget {
                   ),
                   SizedBox(
                     width: screenWidth * 0.7,
-                    child: Text(
+                    child: const Text(
                       "This app was developed as a part of my project, marking a significant milestone in my career. DoorCare is a home service platform that allows users to book plumbing, electrical, and AC repair services with ease. It provides a seamless experience for users to manage service bookings and track their progress in real-time. If you have any questions or feedback about DoorCare, you can contact us at:",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -64,10 +64,10 @@ class AboutUsPage extends StatelessWidget {
                       await RedirectLink
                           .launchEmail(); // Launch Email video on tap
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'safwanpulisseri123@gmail.com', // Text to act as a link
                           style: TextStyle(
                             color: AppColor.toneFive,
@@ -76,7 +76,7 @@ class AboutUsPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Icon(FontAwesomeIcons.link),
                         ),
                       ],

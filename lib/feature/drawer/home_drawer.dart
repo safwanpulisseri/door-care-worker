@@ -115,7 +115,7 @@ class CustomDrawer extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BookingHistoryPage(),
+                            builder: (context) => const BookingHistoryPage(),
                           ),
                         );
                       },
@@ -127,6 +127,7 @@ class CustomDrawer extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
+                            // ignore: prefer_const_constructors
                             builder: (context) => HowToUsePage(),
                           ),
                         );
@@ -159,6 +160,7 @@ class CustomDrawer extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
+                            // ignore: prefer_const_constructors
                             builder: (context) => AboutUsPage(),
                           ),
                         );
@@ -201,7 +203,7 @@ class CustomDrawer extends StatelessWidget {
             indent: 30,
             endIndent: 30,
           ),
-          Text(
+          const Text(
             'version: 1.0.0+1',
             style: TextStyle(
               color: AppColor.toneThree,

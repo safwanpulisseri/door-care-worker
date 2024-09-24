@@ -1,4 +1,5 @@
 import 'dart:developer';
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../data/repository/commit_new_service_repo.dart';

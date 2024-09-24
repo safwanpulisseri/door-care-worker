@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthSuccessState(userModel: userModel!));
       } else {
         log("no data found");
-        emit(AuthFailState());
+        emit(const AuthFailState());
       }
     });
     on<SignOutEvent>((event, emit) async {
@@ -27,7 +27,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _authRepo.signOut();
         emit(AuthSignedOutState());
       } catch (e) {
-        emit(AuthFailState());
+        emit(const AuthFailState());
       }
     });
     on<EmailSignInAuthEvent>(

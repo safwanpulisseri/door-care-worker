@@ -16,7 +16,8 @@ class ChatPageThree extends StatefulWidget {
   final String username;
   final String userProfile;
 
-  ChatPageThree({
+  const ChatPageThree({
+    super.key,
     required this.conversationId,
     required this.senderId,
     required this.receiverId,
@@ -25,7 +26,7 @@ class ChatPageThree extends StatefulWidget {
   });
 
   @override
-  _ChatPageState createState() => _ChatPageState();
+  createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPageThree> {
@@ -87,7 +88,7 @@ class _ChatPageState extends State<ChatPageThree> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
       }
@@ -128,12 +129,13 @@ class _ChatPageState extends State<ChatPageThree> {
                     )
                   : const AssetImage(AppPngPath.personImage),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
+              // ignore: unnecessary_string_interpolations
               '${widget.username}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColor.secondary,
               ),
             ),
@@ -167,8 +169,8 @@ class _ChatPageState extends State<ChatPageThree> {
                 String dateHeader;
                 if (_isSameDay(createdAt, DateTime.now())) {
                   dateHeader = 'Today';
-                } else if (_isSameDay(
-                    createdAt, DateTime.now().subtract(Duration(days: 1)))) {
+                } else if (_isSameDay(createdAt,
+                    DateTime.now().subtract(const Duration(days: 1)))) {
                   dateHeader = 'Yesterday';
                 } else {
                   dateHeader =
@@ -198,7 +200,7 @@ class _ChatPageState extends State<ChatPageThree> {
                             : MainAxisAlignment.start,
                         children: [
                           if (!isCurrentUser) ...[
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             CircleAvatar(
@@ -215,23 +217,23 @@ class _ChatPageState extends State<ChatPageThree> {
                           ],
                           Flexible(
                             child: Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 16),
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 8),
                               decoration: BoxDecoration(
                                 color: isCurrentUser
                                     ? AppColor.primary
                                     : AppColor.toneTwelve,
                                 borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
+                                  bottomLeft: const Radius.circular(12),
+                                  bottomRight: const Radius.circular(12),
                                   topLeft: isCurrentUser
-                                      ? Radius.circular(12)
+                                      ? const Radius.circular(12)
                                       : Radius.zero,
                                   topRight: isCurrentUser
                                       ? Radius.zero
-                                      : Radius.circular(12),
+                                      : const Radius.circular(12),
                                 ),
                               ),
                               child: Column(
@@ -248,7 +250,7 @@ class _ChatPageState extends State<ChatPageThree> {
                                     ),
                                     softWrap: true,
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Text(
                                     formattedDate,
                                     style: TextStyle(
@@ -303,17 +305,17 @@ class _ChatPageState extends State<ChatPageThree> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 GestureDetector(
                   onTap: _sendMessage,
-                  child: Material(
-                    shape: const CircleBorder(),
+                  child: const Material(
+                    shape: CircleBorder(),
                     color: AppColor.primary,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const Icon(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
                         size: 30,
                         IconlyLight.send,
                         color: AppColor.background,

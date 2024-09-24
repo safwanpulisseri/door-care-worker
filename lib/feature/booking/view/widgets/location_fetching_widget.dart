@@ -50,8 +50,8 @@ class LocationFetchingWidget extends StatelessWidget {
                       width: 1.0,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
                     child: Icon(
                       IconlyLight.location,
                     ),
@@ -82,8 +82,8 @@ class LocationFetchingWidget extends StatelessWidget {
                       width: 1.0,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
                     child: Icon(
                       IconlyLight.location,
                     ),
@@ -114,8 +114,8 @@ class LocationFetchingWidget extends StatelessWidget {
                       width: 1.0,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
                     child: Icon(
                       IconlyLight.location,
                     ),

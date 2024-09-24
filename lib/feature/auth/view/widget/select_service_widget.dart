@@ -8,8 +8,7 @@ import 'auth_textformfield_widget.dart';
 class SelectServiceField extends StatelessWidget {
   final TextEditingController serviceController;
 
-  const SelectServiceField({required this.serviceController, Key? key})
-      : super(key: key);
+  const SelectServiceField({required this.serviceController, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class SelectServiceField extends StatelessWidget {
             return BlocBuilder<SelectServiceBloc, SelectServiceState>(
               builder: (context, state) {
                 if (state is FetchAllAddedServicesLoadingState) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is FetchAllAddedServicesSuccessState) {
                   return SimpleDialog(
                     title: const Text(
@@ -58,8 +57,8 @@ class SelectServiceField extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Center(
-                          child: const Text(
+                        child: const Center(
+                          child: Text(
                             'OK',
                             style: TextStyle(color: AppColor.secondary),
                           ),

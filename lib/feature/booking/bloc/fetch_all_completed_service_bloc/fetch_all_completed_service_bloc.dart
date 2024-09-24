@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../data/model/fetch_all_commited_service_model.dart';
@@ -7,7 +8,7 @@ part 'fetch_all_completed_service_state.dart';
 
 class FetchAllCompletedServiceBloc
     extends Bloc<FetchAllCompletedServiceEvent, FetchAllCompletedServiceState> {
-  FetchAllCompletedRepo _fetchAllCompletedRepo;
+  final FetchAllCompletedRepo _fetchAllCompletedRepo;
   FetchAllCompletedServiceBloc(this._fetchAllCompletedRepo)
       : super(FetchAllCompletedServiceInitialState()) {
     on<FetchAllCompletedServiceEvent>((event, emit) async {

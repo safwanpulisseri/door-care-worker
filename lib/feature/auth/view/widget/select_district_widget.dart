@@ -7,8 +7,7 @@ import 'auth_textformfield_widget.dart';
 class SelectDistrictField extends StatelessWidget {
   final TextEditingController districtController;
 
-  const SelectDistrictField({required this.districtController, Key? key})
-      : super(key: key);
+  const SelectDistrictField({required this.districtController, super.key});
 
   @override
   Widget build(BuildContext context) {

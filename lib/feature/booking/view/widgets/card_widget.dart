@@ -3,6 +3,7 @@ import 'package:doorcareworker/feature/manageService/chat/bloc/bloc/create_conve
 import 'package:doorcareworker/feature/manageService/chat/view/chat_page.dart';
 import 'package:doorcareworker/feature/manageService/chat/view/chat_page_three.dart';
 import 'package:doorcareworker/feature/manageService/inc/view/page/generate_bill.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -28,7 +29,7 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _navigateToChatPage(String senderId, String receiverId) async {
+    void navigateToChatPage(String senderId, String receiverId) async {
       try {
         // Get the conversation details from the API
         final response = await startConversation(senderId, receiverId);
@@ -39,6 +40,7 @@ class CardWidget extends StatelessWidget {
 
         // Navigate to the chat page with the obtained conversation ID, username, and user profile
         Navigator.push(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(
             builder: (context) => ChatPageThree(
@@ -52,7 +54,9 @@ class CardWidget extends StatelessWidget {
         );
       } catch (e) {
         // Handle errors if the API call fails
-        print('Error: $e');
+        if (kDebugMode) {
+          print('Error: $e');
+        }
         // Optionally, show an error message to the user
       }
     }
@@ -208,8 +212,8 @@ class CardWidget extends StatelessWidget {
                               width: 1.0,
                             ),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(7.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(7.0),
                             child: Icon(
                               IconlyLight.calendar,
                             ),
@@ -265,8 +269,7 @@ class CardWidget extends StatelessWidget {
                           //     MaterialPageRoute(
                           //         builder: (context) => ChatScreen()));
                           // Example usage
-                          _navigateToChatPage(
-                              service.workerId!, service.userId);
+                          navigateToChatPage(service.workerId!, service.userId);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColor.primary,

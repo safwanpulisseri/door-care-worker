@@ -47,6 +47,7 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                   });
                   onImageSelected(File(pickedFile.path));
                 }
+                // ignore: use_build_context_synchronously
                 Navigator.of(context).pop();
               },
             ),
@@ -66,6 +67,7 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                   });
                   onImageSelected(File(pickedFile.path));
                 }
+                // ignore: use_build_context_synchronously
                 Navigator.of(context).pop();
               },
             ),

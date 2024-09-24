@@ -30,7 +30,7 @@ class ManageServiceHome extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Google Map'),
+              child: const Text('Google Map'),
             ),
           ),
           Center(
@@ -46,7 +46,7 @@ class ManageServiceHome extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Google Map'),
+              child: const Text('Google Map'),
             ),
           ),
         ],

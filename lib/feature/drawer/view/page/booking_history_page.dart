@@ -22,6 +22,7 @@ class BookingHistoryPage extends StatelessWidget {
         FetchAllCompletedRepo(FetchAllCompletedRemote(), AuthLocalService()),
       )..add(FetchAllPaymentEnteredServiceEvent()),
       child: Scaffold(
+        // ignore: prefer_const_constructors
         appBar: AppBarSingle(),
         body: BlocBuilder<FetchAllCompletedServiceBloc,
             FetchAllCompletedServiceState>(

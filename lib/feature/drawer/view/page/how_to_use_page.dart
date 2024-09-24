@@ -9,7 +9,7 @@ import 'package:doorcareworker/core/widget/padding_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HowToUsePage extends StatelessWidget {
-  HowToUsePage({super.key});
+  const HowToUsePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +64,10 @@ class HowToUsePage extends StatelessWidget {
                       await RedirectLink
                           .launchYouTubeVideo(); // Launch YouTube video on tap
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'YouTube video link', // Text to act as a link
                           style: TextStyle(
                             color: AppColor.toneFive,
@@ -76,7 +76,7 @@ class HowToUsePage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Icon(FontAwesomeIcons.link),
                         ),
                       ],

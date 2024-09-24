@@ -59,7 +59,7 @@ class GenerateBillPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBarSingle(),
+        appBar: const AppBarSingle(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final class RedirectLink {
@@ -10,7 +11,9 @@ final class RedirectLink {
     try {
       await launchUrl(url);
     } catch (e) {
-      print('Error launching URL: $e');
+      if (kDebugMode) {
+        print('Error launching URL: $e');
+      }
       // Handle the error as needed
     }
   }
@@ -22,7 +25,9 @@ final class RedirectLink {
     try {
       await launchUrl(url);
     } catch (e) {
-      print('Error launching URL: $e');
+      if (kDebugMode) {
+        print('Error launching URL: $e');
+      }
       // Handle the error as needed
     }
   }
@@ -45,7 +50,9 @@ final class RedirectLink {
       await launchUrl(emailUri);
     } catch (e) {
       // Handle error
-      print('Error launching email: $e');
+      if (kDebugMode) {
+        print('Error launching URL: $e');
+      }
     }
   }
 }
