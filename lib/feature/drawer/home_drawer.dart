@@ -1,5 +1,6 @@
-import 'package:doorcareworker/feature/drawer/view/page/how_to_use_page.dart';
 import 'package:flutter/material.dart';
+import 'view/page/about_us_page.dart';
+import 'view/page/how_to_use_page.dart';
 import 'view/page/booking_history_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -154,8 +155,13 @@ class CustomDrawer extends StatelessWidget {
                     DrawerItem(
                       icon: IconlyLight.infoSquare,
                       text: 'About us',
-                      onTap: () async {
-                        await RedirectLink.launchPrivacyPolicy();
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AboutUsPage(),
+                          ),
+                        );
                       },
                     ),
                     // DrawerItem(

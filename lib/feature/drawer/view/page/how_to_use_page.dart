@@ -1,9 +1,8 @@
-import '../../../../core/util/redirect_link.dart';
 import '../widget/appbar_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/util/svg_asset.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/util/redirect_link.dart';
 import '../../../../core/theme/color/app_color.dart';
 import '../../../../core/widget/opacity_container.dart';
 import 'package:doorcareworker/core/widget/padding_widget.dart';
@@ -14,6 +13,7 @@ class HowToUsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: const AppBarSingle(),
       body: PaddingWidget(
@@ -43,13 +43,13 @@ class HowToUsePage extends StatelessWidget {
                   SvgPicture.asset(
                     AppSvgPath.mainLogo,
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    width: screenWidth * 0.7,
                   ),
                   const SizedBox(
                     width: 250,
                     child: Text(
-                      "Here's a quick guide on how to use the app: Enjoy using the app and manage your finances. Please visit our YouTube channel or watch our video now:",
+                      "Here's a quick guide on how to use the app: Enjoy using the app and manage your home services efficiently. Please visit our YouTube channel or watch our video now.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
@@ -72,7 +72,7 @@ class HowToUsePage extends StatelessWidget {
                           style: TextStyle(
                             color: AppColor.toneFive,
                             decoration: TextDecoration.underline,
-                            fontSize: 22,
+                            fontSize: 20,
                           ),
                         ),
                         Padding(

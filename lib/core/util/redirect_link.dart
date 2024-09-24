@@ -26,4 +26,26 @@ final class RedirectLink {
       // Handle the error as needed
     }
   }
+
+  // Function to launch email on tap
+  static Future<void> launchEmail() async {
+    const String emailAddress = 'safwanpulisseri123@gmail.com';
+    const String emailSubject = 'Feedback/Question';
+    const String emailBody = 'Your_feedback/question_type_here';
+
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: emailAddress,
+      queryParameters: {
+        'subject': emailSubject,
+        'body': emailBody,
+      },
+    );
+    try {
+      await launchUrl(emailUri);
+    } catch (e) {
+      // Handle error
+      print('Error launching email: $e');
+    }
+  }
 }
