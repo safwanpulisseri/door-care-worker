@@ -4,15 +4,15 @@ import 'view/page/how_to_use_page.dart';
 import 'view/page/booking_history_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:toastification/toastification.dart';
-import '../../core/widget/toastification_widget.dart';
 import 'package:doorcareworker/core/util/png_asset.dart';
 import 'package:doorcareworker/core/util/redirect_link.dart';
 import 'package:doorcareworker/core/theme/color/app_color.dart';
-import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
 import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
 import 'package:doorcareworker/feature/drawer/view/page/user_details_page.dart';
 import 'package:doorcareworker/feature/drawer/view/page/wallet_amount_page.dart';
+
+import 'view/util/sign_out_handle.dart';
+import 'view/widget/drawer_item_widget.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -170,26 +170,9 @@ class CustomDrawer extends StatelessWidget {
                     //   onTap: () {},
                     // ),
                     DrawerItem(
-                      icon: IconlyLight.logout,
-                      text: 'Log Out',
-                      onTap: () {
-                        context.read<AuthBloc>().add(SignOutEvent());
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignInPage(),
-                          ),
-                          (route) => false,
-                        );
-                        ToastificationWidget.show(
-                          context: context,
-                          type: ToastificationType.success,
-                          title: 'Success',
-                          description: 'You have been signed out successfully.',
-                          textColor: AppColor.secondary,
-                        );
-                      },
-                    ),
+                        icon: IconlyLight.logout,
+                        text: 'Log Out',
+                        onTap: () => SignOutHandle.showSignOutDialog(context)),
                   ],
                 );
               },
@@ -227,31 +210,6 @@ class CustomDrawer extends StatelessWidget {
           const SizedBox(height: 5),
         ],
       ),
-    );
-  }
-}
-
-class DrawerItem extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final VoidCallback onTap;
-
-  const DrawerItem({
-    super.key,
-    required this.icon,
-    required this.text,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, color: AppColor.background),
-      title: Text(
-        text,
-        style: const TextStyle(color: AppColor.background),
-      ),
-      onTap: onTap,
     );
   }
 }
