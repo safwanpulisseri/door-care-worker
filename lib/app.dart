@@ -10,14 +10,11 @@ import 'feature/navigation_menu/bloc/bloc/navigation_bloc.dart';
 import 'feature/service/bloc/bloc/commit_booked_service_bloc.dart';
 import 'feature/service/data/repository/commit_new_service_repo.dart';
 import 'feature/auth/bloc/select_service_bloc/select_service_bloc.dart';
-import 'feature/manageService/chat/bloc/bloc/create_conversation_bloc.dart';
 import 'feature/manageService/inc/bloc/bloc/generate_bill_service_bloc.dart';
 import 'feature/manageService/inc/data/repository/generate_bill_repo.dart';
 import 'feature/auth/data/service/remote/select_service_remote_service.dart';
 import 'feature/service/data/service/remote/commit_service_remote_service.dart';
 import 'feature/manageService/inc/data/services/remote/generate_bill_remote.dart';
-import 'feature/manageService/chat/data/service/remote/createConversationRemote.dart';
-import 'package:doorcareworker/feature/manageService/chat/data/repository/createConversationRepo.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -47,12 +44,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
         RepositoryProvider(
-          create: (context) => Createconversationrepo(
-            Createconversation(),
-            AuthLocalService(),
-          ),
-        ),
-        RepositoryProvider(
           create: (context) => GenerateBillServiceRepo(
             GenerateBillRemoteService(),
             AuthLocalService(),
@@ -72,10 +63,6 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 CommitBookedServiceBloc(context.read<CommitNewServiceRepo>()),
-          ),
-          BlocProvider(
-            create: (context) =>
-                CreateConversationBloc(context.read<Createconversationrepo>()),
           ),
           BlocProvider(
             create: (context) => GenerateBillServiceBloc(
