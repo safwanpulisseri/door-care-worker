@@ -70,88 +70,84 @@ class _SignInPageState extends State<SignInPage> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Form(
-            key: _formKey,
-            child: PaddingWidget(
-              child: Column(
-                children: [
-                  const Spacer(
-                    flex: 5,
-                  ),
-                  Center(
-                    child: SvgPicture.asset(
-                      AppSvgPath.mainLogo,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: PaddingWidget(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 50),
+                    Center(
+                      child: SvgPicture.asset(
+                        AppSvgPath.mainLogo,
+                      ),
                     ),
-                  ),
-                  const Spacer(flex: 1),
-                  Text(
-                    'Sign in',
-                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 35,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const Spacer(flex: 2),
-                  AuthTextFormField(
-                    controller: _emailController,
-                    textInputType: TextInputType.emailAddress,
-                    labelText: 'E-mail',
-                    hintText: 'Enter your email',
-                    validator: AuthUtil.validateEmail,
-                    prefixIcon: AppSvgPath.mailLogo,
-                  ),
-                  const Spacer(flex: 1),
-                  AuthTextFormField(
-                    controller: _passwordController,
-                    textInputType: TextInputType.visiblePassword,
-                    labelText: 'Password',
-                    hintText: 'Enter your password',
-                    obscureText: true,
-                    validator: AuthUtil.validatePassword,
-                    prefixIcon: AppSvgPath.passwordLogo,
-                    showPasswordToggle: true,
-                  ),
-                  const Spacer(flex: 1),
-                  AuthButton(
-                    buttonText: 'Sign In',
-                    buttonCallback: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        context.read<AuthBloc>().add(
-                              EmailSignInAuthEvent(
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text.trim(),
+                    Text(
+                      'Sign in',
+                      style:
+                          Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 35,
                               ),
-                            );
-                      } else {
-                        ToastificationWidget.show(
-                          context: context,
-                          type: ToastificationType.error,
-                          title: 'Validation Error',
-                          description: 'Please correct the errors in the form.',
-                          textColor: AppColor.secondary,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                    AuthTextFormField(
+                      controller: _emailController,
+                      textInputType: TextInputType.emailAddress,
+                      labelText: 'E-mail',
+                      hintText: 'Enter your email',
+                      validator: AuthUtil.validateEmail,
+                      prefixIcon: AppSvgPath.mailLogo,
+                    ),
+                    AuthTextFormField(
+                      controller: _passwordController,
+                      textInputType: TextInputType.visiblePassword,
+                      labelText: 'Password',
+                      hintText: 'Enter your password',
+                      obscureText: true,
+                      validator: AuthUtil.validatePassword,
+                      prefixIcon: AppSvgPath.passwordLogo,
+                      showPasswordToggle: true,
+                    ),
+                    const SizedBox(height: 10),
+                    AuthButton(
+                      buttonText: 'Sign In',
+                      buttonCallback: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          context.read<AuthBloc>().add(
+                                EmailSignInAuthEvent(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                ),
+                              );
+                        } else {
+                          ToastificationWidget.show(
+                            context: context,
+                            type: ToastificationType.error,
+                            title: 'Validation Error',
+                            description:
+                                'Please correct the errors in the form.',
+                            textColor: AppColor.secondary,
+                          );
+                        }
+                      },
+                      textCallback: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => const SignUpPage()),
                         );
-                      }
-                    },
-                    textCallback: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (ctx) => const SignUpPage()),
-                      );
-                    },
-                    navigationTitle: "Don't have an account? ",
-                    navigationSubtitle: "Join our team for free",
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  const TermsAndConditionsWidget(),
-                  const Spacer(
-                    flex: 20,
-                  ),
-                ],
+                      },
+                      navigationTitle: "Don't have an account? ",
+                      navigationSubtitle: "Join our team for free",
+                    ),
+                    const SizedBox(height: 10),
+                    const TermsAndConditionsWidget(),
+                  ],
+                ),
               ),
             ),
           ),

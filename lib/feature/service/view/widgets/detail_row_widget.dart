@@ -16,6 +16,7 @@ class DetailRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
           backgroundColor: Colors.transparent,
@@ -34,25 +35,29 @@ class DetailRowWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Row(
-          children: [
-            Text(
-              label,
-              style: const TextStyle(
-                color: AppColor.secondary,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+        Expanded(
+          child: Wrap(
+            direction: Axis.horizontal,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  color: AppColor.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              value,
-              style: const TextStyle(
-                color: AppColor.secondary,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              Text(
+                value,
+                style: const TextStyle(
+                  color: AppColor.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
