@@ -8,7 +8,7 @@ import '../../../auth/data/service/local/auth_local_service.dart';
 import '../../bloc/fetch_all_completed_service_bloc/fetch_all_completed_service_bloc.dart';
 import '../../data/repository/fetch_all_completed_repo.dart';
 import '../../data/services/remote/fetch_all_completed_remote.dart';
-import '../widgets/card_widget_two.dart';
+import '../widgets/completed_card_widget.dart';
 
 class DetailsOfCompletedServicePage extends StatelessWidget {
   const DetailsOfCompletedServicePage({super.key});

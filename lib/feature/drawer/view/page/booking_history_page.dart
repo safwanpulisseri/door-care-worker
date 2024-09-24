@@ -9,7 +9,7 @@ import '../../../auth/data/service/local/auth_local_service.dart';
 import '../../../booking/bloc/fetch_all_completed_service_bloc/fetch_all_completed_service_bloc.dart';
 import '../../../booking/data/repository/fetch_all_completed_repo.dart';
 import '../../../booking/data/services/remote/fetch_all_completed_remote.dart';
-import '../../../booking/view/widgets/card_widget_two.dart';
+import '../../../booking/view/widgets/completed_card_widget.dart';
 import '../widget/appbar_widget.dart';
 
 class BookingHistoryPage extends StatelessWidget {

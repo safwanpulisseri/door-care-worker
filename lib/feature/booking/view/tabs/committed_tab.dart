@@ -8,7 +8,7 @@ import '../../../auth/data/service/local/auth_local_service.dart';
 import '../../bloc/fetch_all_commited_service_bloc/fetch_all_commited_service_bloc.dart';
 import '../../data/repository/fetch_all_commited_service_repo.dart';
 import '../../data/services/remote/fetch_all_commited_service_remote.dart';
-import '../widgets/card_widget.dart';
+import '../widgets/committed_card_widget.dart';
 
 class DetailsOfCommittedServicePage extends StatelessWidget {
   const DetailsOfCommittedServicePage({super.key});
