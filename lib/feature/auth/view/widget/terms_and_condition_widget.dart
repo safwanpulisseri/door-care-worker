@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/util/privacy_policy.dart';
+import '../../../../core/util/redirect_link.dart';
 import 'navigation_text.dart';
 
 class TermsAndConditionsWidget extends StatelessWidget {
@@ -17,14 +17,14 @@ class TermsAndConditionsWidget extends StatelessWidget {
           leadingText: "By proceeding, I accept Door Care",
           buttonText: 'T&C',
           callback: () async {
-            await PrivacyPolicy.launchPrivacyPolicy();
+            await RedirectLink.launchPrivacyPolicy();
           },
         ),
         NavigationText(
           leadingText: "and",
           buttonText: 'Privacy Policy.',
           callback: () async {
-            await PrivacyPolicy.launchPrivacyPolicy();
+            await RedirectLink.launchPrivacyPolicy();
           },
         ),
       ],

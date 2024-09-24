@@ -1,3 +1,4 @@
+import 'package:doorcareworker/feature/drawer/view/page/how_to_use_page.dart';
 import 'package:flutter/material.dart';
 import 'view/page/booking_history_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +6,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:toastification/toastification.dart';
 import '../../core/widget/toastification_widget.dart';
 import 'package:doorcareworker/core/util/png_asset.dart';
-import 'package:doorcareworker/core/util/privacy_policy.dart';
+import 'package:doorcareworker/core/util/redirect_link.dart';
 import 'package:doorcareworker/core/theme/color/app_color.dart';
 import 'package:doorcareworker/feature/auth/view/page/sign_in_page.dart';
 import 'package:doorcareworker/feature/auth/bloc/auth_bloc/auth_bloc.dart';
@@ -121,8 +122,13 @@ class CustomDrawer extends StatelessWidget {
                     DrawerItem(
                       icon: IconlyLight.activity,
                       text: 'How to use',
-                      onTap: () async {
-                        await PrivacyPolicy.launchPrivacyPolicy();
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HowToUsePage(),
+                          ),
+                        );
                       },
                     ),
 
@@ -135,21 +141,21 @@ class CustomDrawer extends StatelessWidget {
                       icon: IconlyLight.paper,
                       text: 'Privacy Policy',
                       onTap: () async {
-                        await PrivacyPolicy.launchPrivacyPolicy();
+                        await RedirectLink.launchPrivacyPolicy();
                       },
                     ),
                     DrawerItem(
                       icon: IconlyLight.message,
                       text: 'Terms & Conditions',
                       onTap: () async {
-                        await PrivacyPolicy.launchPrivacyPolicy();
+                        await RedirectLink.launchPrivacyPolicy();
                       },
                     ),
                     DrawerItem(
                       icon: IconlyLight.infoSquare,
                       text: 'About us',
                       onTap: () async {
-                        await PrivacyPolicy.launchPrivacyPolicy();
+                        await RedirectLink.launchPrivacyPolicy();
                       },
                     ),
                     // DrawerItem(
